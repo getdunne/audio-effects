@@ -17,7 +17,7 @@ On Windows, I built the fftw library at *C:\fftw-3.3.5-dll64*, and set the Visua
 ## Open problems
 At the time of writing, the *robotisation* project still does not compile, as it relies on older JUCE programming constructs for in-place buffer processing.
 
-Also, the *distortion*, *pvoc_passthrough* and *pvoc_pitchshift* projects compile, but the resulting Mac Audio Unit (AU) plug-ins do not pass validation in Logic Pro X.
+Also, the *distortion*, *pvoc_passthrough* and *pvoc_pitchshift* projects compile, but the resulting Mac Audio Unit (AU) plug-ins do not pass validation in Logic Pro X. *distortion* works OK as a VST on Windows, but the two *pvoc* VSTs crash.
 
 Other issues noted on Mac with Logic Pro X:
 
