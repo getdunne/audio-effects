@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="v6Hele" name="vibrato" projectType="audioplug" version="1.0.0"
+              bundleIdentifier="uk.ac.qmul.eecs.vibratoeffect" buildVST="1"
+              buildRTAS="0" buildAU="1" pluginName="Vibrato" pluginDesc="Vibrato effect"
+              pluginManufacturer="Reiss and McPherson" pluginManufacturerCode="JRAM"
+              pluginCode="vibr" pluginChannelConfigs="{2, 2}, {1, 1}" pluginIsSynth="0"
+              pluginWantsMidiIn="0" pluginProducesMidiOut="0" pluginSilenceInIsSilenceOut="1"
+              pluginTailLength="0" pluginEditorRequiresKeys="0" pluginAUExportPrefix="vibratoAU"
+              pluginAUViewClass="vibratoAU_V1" pluginRTASCategory="" jucerVersion="5.4.2"
+              companyName="Reiss and McPherson" buildVST3="0" buildAAX="0"
+              aaxIdentifier="com.yourcompany.vibrato" pluginAAXCategory="2"
+              includeBinaryInAppConfig="1" pluginFormats="buildVST,buildAU">
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX" objCExtraSuffix="jTd9NF" vstFolder="~/SDKs/vstsdk2.4"
+               postbuildCommand="&#10;# This script takes the build product and copies it to the AU, VST, VST3, RTAS and AAX folders, depending on &#10;# which plugin types you've built&#10;&#10;original=$CONFIGURATION_BUILD_DIR/$FULL_PRODUCT_NAME&#10;&#10;# this looks inside the binary to detect which platforms are needed.. &#10;copyAU=&#96;nm -g &quot;$CONFIGURATION_BUILD_DIR/$EXECUTABLE_PATH&quot; | grep -i 'AudioUnit' | wc -l&#96;&#10;copyVST=&#96;nm -g &quot;$CONFIGURATION_BUILD_DIR/$EXECUTABLE_PATH&quot; | grep -i 'VSTPlugin' | wc -l&#96;&#10;copyVST3=&#96;nm -g &quot;$CONFIGURATION_BUILD_DIR/$EXECUTABLE_PATH&quot; | grep -i 'GetPluginFactory' | wc -l&#96;&#10;copyRTAS=&#96;nm -g &quot;$CONFIGURATION_BUILD_DIR/$EXECUTABLE_PATH&quot; | grep -i 'CProcess' | wc -l&#96;&#10;copyAAX=&#96;nm -g &quot;$CONFIGURATION_BUILD_DIR/$EXECUTABLE_PATH&quot; | grep -i 'ACFStartup' | wc -l&#96;&#10;&#10;if [ $copyAU -gt 0 ]; then&#10;  echo &quot;Copying to AudioUnit folder...&quot;&#10;  AUDir=~/Library/Audio/Plug-Ins/Components&#10;  mkdir -p &quot;$AUDir&quot;&#10;  AU=$AUDir/$PRODUCT_NAME.component&#10;  if [ -d &quot;$AU&quot; ]; then &#10;    rm -r &quot;$AU&quot;&#10;  fi&#10;&#10;  cp -r &quot;$original&quot; &quot;$AU&quot;&#10;  sed -i &quot;&quot; -e 's/TDMwPTul/BNDLPTul/g' &quot;$AU/Contents/PkgInfo&quot;&#10;  sed -i &quot;&quot; -e 's/TDMw/BNDL/g' &quot;$AU/Contents/$INFOPLIST_FILE&quot;&#10;fi&#10;&#10;if [ $copyVST -gt 0 ]; then&#10;  echo &quot;Copying to VST folder...&quot;&#10;  VSTDir=~/Library/Audio/Plug-Ins/VST&#10;  mkdir -p &quot;$VSTDir&quot;&#10;  VST=$VSTDir/$PRODUCT_NAME.vst&#10;  if [ -d &quot;$VST&quot; ]; then &#10;    rm -r &quot;$VST&quot;&#10;  fi&#10;&#10;  cp -r &quot;$original&quot; &quot;$VST&quot;&#10;  sed -i &quot;&quot; -e 's/TDMwPTul/BNDLPTul/g' &quot;$VST/Contents/PkgInfo&quot;&#10;  sed -i &quot;&quot; -e 's/TDMw/BNDL/g' &quot;$VST/Contents/$INFOPLIST_FILE&quot;&#10;fi&#10;&#10;if [ $copyVST3 -gt 0 ]; then&#10;  echo &quot;Copying to VST3 folder...&quot;&#10;  VST3Dir=~/Library/Audio/Plug-Ins/VST3&#10;  mkdir -p &quot;$VST3Dir&quot;&#10;  VST3=$VST3Dir/$PRODUCT_NAME.vst3&#10;  if [ -d &quot;$VST3&quot; ]; then &#10;    rm -r &quot;$VST3&quot;&#10;  fi&#10;&#10;  cp -r &quot;$original&quot; &quot;$VST3&quot;&#10;  sed -i &quot;&quot; -e 's/TDMwPTul/BNDLPTul/g' &quot;$VST3/Contents/PkgInfo&quot;&#10;  sed -i &quot;&quot; -e 's/TDMw/BNDL/g' &quot;$VST3/Contents/$INFOPLIST_FILE&quot;&#10;fi&#10;&#10;if [ $copyRTAS -gt 0 ]; then&#10;  echo &quot;Copying to RTAS folder...&quot;&#10;  RTASDir=/Library/Application\ Support/Digidesign/Plug-Ins&#10;  if [ -d &quot;$RTASDir&quot; ]; then&#10;    RTAS=$RTASDir/$PRODUCT_NAME.dpm&#10;    if [ -d &quot;$RTAS&quot; ]; then&#10;      rm -r &quot;$RTAS&quot;&#10;    fi&#10;&#10;    cp -r &quot;$original&quot; &quot;$RTAS&quot;&#10;  fi&#10;fi&#10;&#10;if [ $copyAAX -gt 0 ]; then&#10;  echo &quot;Copying to AAX folder...&quot;&#10;&#10;  if [ -d &quot;/Applications/ProTools_3PDev/Plug-Ins&quot; ]; then&#10;    AAX1=&quot;/Applications/ProTools_3PDev/Plug-Ins/$PRODUCT_NAME.aaxplugin&quot;&#10;&#10;    if [ -d &quot;$AAX1&quot; ]; then&#10;      rm -r &quot;$AAX1&quot;&#10;    fi&#10;&#10;    cp -R -H &quot;$original&quot; &quot;$AAX1&quot;&#10;  fi&#10;&#10;  if [ -d &quot;/Library/Application Support/Avid/Audio/Plug-Ins&quot; ]; then&#10;    AAX2=&quot;/Library/Application Support/Avid/Audio/Plug-Ins/$PRODUCT_NAME.aaxplugin&quot;&#10;&#10;    if [ -d &quot;$AAX2&quot; ]; then&#10;      rm -r &quot;$AAX2&quot;&#10;    fi&#10;&#10;    cp -R -H &quot;$original&quot; &quot;$AAX2&quot;&#10;  fi&#10;fi&#10;">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="vibrato"
+                       osxArchitecture="64BitUniversal"/>
+        <CONFIGURATION name="Release" isDebug="0" optimisation="2" targetName="vibrato"
+                       osxArchitecture="64BitUniversal"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_opengl" path="../../juce/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../juce/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../juce/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../juce/modules"/>
+        <MODULEPATH id="juce_events" path="../../juce/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../juce/modules"/>
+        <MODULEPATH id="juce_core" path="../../juce/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../juce/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../juce/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../juce/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../juce/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../juce/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../../juce/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+    <VS2017 targetFolder="Builds/VisualStudio2017">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug"/>
+        <CONFIGURATION isDebug="0" name="Release"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_opengl" path="../../juce"/>
+        <MODULEPATH id="juce_gui_extra" path="../../juce"/>
+        <MODULEPATH id="juce_gui_basics" path="../../juce"/>
+        <MODULEPATH id="juce_graphics" path="../../juce"/>
+        <MODULEPATH id="juce_events" path="../../juce"/>
+        <MODULEPATH id="juce_data_structures" path="../../juce"/>
+        <MODULEPATH id="juce_core" path="../../juce"/>
+        <MODULEPATH id="juce_audio_utils" path="../../juce"/>
+        <MODULEPATH id="juce_audio_processors" path="../../juce"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../juce"/>
+        <MODULEPATH id="juce_audio_formats" path="../../juce"/>
+        <MODULEPATH id="juce_audio_devices" path="../../juce"/>
+        <MODULEPATH id="juce_audio_basics" path="../../juce"/>
+      </MODULEPATHS>
+    </VS2017>
+  </EXPORTFORMATS>
+  <MAINGROUP id="ALF6VO" name="vibrato">
+    <GROUP id="{513EA84C-3809-DD4E-47BB-057919321B7F}" name="Source">
+      <FILE id="t9Lt5C" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="OMF0sI" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="Z6tpEX" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="DXVIYX" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+  <JUCEOPTIONS JUCE_QUICKTIME="disabled"/>
+  <LIVE_SETTINGS>
+    <OSX enableCxx11="1"/>
+    <WINDOWS/>
+  </LIVE_SETTINGS>
+</JUCERPROJECT>
