@@ -15,7 +15,7 @@ On the Mac, you can just follow the [Installation on Unix](http://www.fftw.org/f
 On Windows, I built the fftw library at *C:\fftw-3.3.5-dll64*, and set the Visual Studio *Header Search Paths* and *Extra Library Search Paths* to that folder path in the Projucer.
 
 ## Open problems
-At the time of writing, the *obotisation* project still does not compile, as it relies on older JUCE programming constructs for in-place buffer processing.
+At the time of writing, the *robotisation* project still does not compile, as it relies on older JUCE programming constructs for in-place buffer processing.
 
 Also, the *distortion*, *pvoc_passthrough* and *pvoc_pitchshift* projects compile, but the resulting Mac Audio Unit (AU) plug-ins do not pass validation in Logic Pro X.
 
