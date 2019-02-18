@@ -12,12 +12,11 @@
               aaxIdentifier="com.yourcompany.parametriceq" pluginAAXCategory="2"
               includeBinaryInAppConfig="1" pluginFormats="buildVST,buildAU">
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX" objCExtraSuffix="o4V0Px" vstFolder="~/SDKs/vstsdk2.4">
+    <XCODE_MAC targetFolder="Builds/MacOSX" objCExtraSuffix="o4V0Px" vstFolder="~/SDKs/vstsdk2.4"
+               vstLegacyFolder="~/SDKs/VST_SDK/VST2_SDK">
       <CONFIGURATIONS>
-        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="parametriceq"
-                       osxArchitecture="64BitUniversal"/>
-        <CONFIGURATION name="Release" isDebug="0" optimisation="2" targetName="parametriceq"
-                       osxArchitecture="64BitUniversal"/>
+        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="parametriceq"/>
+        <CONFIGURATION name="Release" isDebug="0" optimisation="2" targetName="parametriceq"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_opengl" path="../../juce/modules"/>

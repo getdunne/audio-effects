@@ -13,14 +13,12 @@
               pluginAAXCategory="2" includeBinaryInAppConfig="1" pluginFormats="buildVST,buildAU">
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX" objCExtraSuffix="RZnSpY" vstFolder="~/SDKs/vstsdk2.4"
-               extraLinkerFlags="-lfftw3 -lm">
+               extraLinkerFlags="-lfftw3" vstLegacyFolder="~/SDKs/VST_SDK/VST2_SDK">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="empty"
-                       osxArchitecture="64BitUniversal" libraryPath="/usr/local/lib"
-                       headerPath="/usr/local/include"/>
+                       libraryPath="/usr/local/lib" headerPath="/usr/local/include"/>
         <CONFIGURATION name="Release" isDebug="0" optimisation="2" targetName="empty"
-                       osxArchitecture="64BitUniversal" libraryPath="/usr/local/lib"
-                       headerPath="/usr/local/include"/>
+                       libraryPath="/usr/local/lib" headerPath="/usr/local/include"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_opengl" path="../../juce/modules"/>

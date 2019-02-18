@@ -12,12 +12,11 @@
               aaxIdentifier="com.yourcompany.empty" pluginAAXCategory="2" includeBinaryInAppConfig="1"
               pluginFormats="buildVST,buildAU">
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX" objCExtraSuffix="RZnSpY" vstFolder="~/SDKs/vstsdk2.4">
+    <XCODE_MAC targetFolder="Builds/MacOSX" objCExtraSuffix="RZnSpY" vstFolder="~/SDKs/vstsdk2.4"
+               vstLegacyFolder="~/SDKs/VST_SDK/VST2_SDK">
       <CONFIGURATIONS>
-        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="empty"
-                       osxArchitecture="64BitUniversal"/>
-        <CONFIGURATION name="Release" isDebug="0" optimisation="2" targetName="empty"
-                       osxArchitecture="64BitUniversal"/>
+        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="empty"/>
+        <CONFIGURATION name="Release" isDebug="0" optimisation="2" targetName="empty"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_opengl" path="../../juce/modules"/>
