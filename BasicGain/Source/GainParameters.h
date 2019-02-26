@@ -14,10 +14,6 @@ struct GainParameters
 
     // Actual working parameter values
     float gain;
-    
-    // get/put XML
-    void putToXml(XmlElement* xml);
-    void getFromXml(XmlElement* xml);
 
 private:
     // Reference to AudioProcessorValueTreeState object that owns the parameter objects

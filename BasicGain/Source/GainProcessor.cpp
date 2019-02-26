@@ -69,8 +69,7 @@ void GainProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer&)
 // Called by the host when it needs to persist the current plugin state
 void GainProcessor::getStateInformation (MemoryBlock& destData)
 {
-    ScopedPointer<XmlElement> xml = new XmlElement(JucePlugin_Name);
-    parameters.putToXml(xml);
+    ScopedPointer<XmlElement> xml(valueTreeState.state.createXml());
     copyXmlToBinary(*xml, destData);
 }
 
@@ -78,8 +77,8 @@ void GainProcessor::getStateInformation (MemoryBlock& destData)
 void GainProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     ScopedPointer<XmlElement> xml = getXmlFromBinary(data, sizeInBytes);
-    if (xml && xml->hasTagName(JucePlugin_Name))
+    if (xml && xml->hasTagName(valueTreeState.state.getType()))
     {
-        parameters.getFromXml(xml);
+        valueTreeState.state = ValueTree::fromXml(*xml);
     }
 }

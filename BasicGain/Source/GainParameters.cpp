@@ -18,11 +18,12 @@ GainParameters::GainParameters(AudioProcessorValueTreeState& vts)
 void GainParameters::createAllParameters()
 {
     // gain: float parameter, range 0.0-1.0, shown as 0.0-10.0 (scaled x10)
-    valueTreeState.createAndAddParameter(gainID, gainName, gainLabel,
+    valueTreeState.createAndAddParameter(std::make_unique<AudioProcessorValueTreeState::Parameter>(
+        gainID, gainName, gainLabel,
         NormalisableRange<float>(0.0f, 10.0f),
         gain,
         [](float value) { return String(value); },
-        [](const String& text) { return text.getFloatValue(); } );
+        [](const String& text) { return text.getFloatValue(); }) );
     valueTreeState.addParameterListener(gainID, &gainListener);
 }
 
@@ -38,20 +39,5 @@ void GainParameters::detachControls()
 void GainParameters::attachControls(Slider& gainSlider)
 {
     detachControls();   // destroy existing attachments, if any
-
     pGainAttachment = new SliderAttachment(valueTreeState, gainID, gainSlider);
-}
-
-void GainParameters::putToXml(XmlElement* xml)
-{
-    // Set XML attributes based on working parameter values
-    xml->setAttribute(gainName, gain);
-}
-
-void GainParameters::getFromXml(XmlElement* pXml)
-{
-    // Set parameters based on XML attributes
-    // Parameter listeners will propagate to working values
-    float fval = (float)pXml->getDoubleAttribute(gainName);
-    valueTreeState.getParameterAsValue(gainID).setValue(fval);
 }
