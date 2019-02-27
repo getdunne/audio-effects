@@ -7,8 +7,8 @@ const String GainParameters::gainName = TRANS("Gain");
 const String GainParameters::gainLabel = TRANS("dB");
 
 GainParameters::GainParameters(AudioProcessorValueTreeState& vts)
-    : valueTreeState(vts)
-    , dbGain(0.0f), linearGain(1.0f)
+    : dbGain(0.0f), linearGain(1.0f)
+    , valueTreeState(vts)
     , gainListener(linearGain, -100.0f)
 {
 }
