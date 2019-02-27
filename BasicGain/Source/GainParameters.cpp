@@ -4,24 +4,28 @@
 // Labels are human-friendly identifiers for use in GUIs
 const String GainParameters::gainID = "gain";
 const String GainParameters::gainName = TRANS("Gain");
-const String GainParameters::gainLabel = TRANS("x10");
+const String GainParameters::gainLabel = TRANS("dB");
 
 GainParameters::GainParameters(AudioProcessorValueTreeState& vts)
     : valueTreeState(vts)
-    , pGainAttachment(nullptr)
-    , gainListener(gain, 0.1f)
+    , dbGain(0.0f), linearGain(1.0f)
+    , gainListener(linearGain, -100.0f)
 {
-    // Set default values of working values
-    gain = 0.5f;
+}
+
+GainParameters::~GainParameters()
+{
+    detachControls();
+    valueTreeState.removeParameterListener(gainID, &gainListener);
 }
 
 void GainParameters::createAllParameters()
 {
-    // gain: float parameter, range 0.0-1.0, shown as 0.0-10.0 (scaled x10)
+    // gain: float parameter, range -100.0 t0 +12.0 dB
     valueTreeState.createAndAddParameter(std::make_unique<AudioProcessorValueTreeState::Parameter>(
         gainID, gainName, gainLabel,
-        NormalisableRange<float>(0.0f, 10.0f),
-        gain,
+        NormalisableRange<float>(-100.0f, 12.0f),
+        dbGain,
         [](float value) { return String(value); },
         [](const String& text) { return text.getFloatValue(); }) );
     valueTreeState.addParameterListener(gainID, &gainListener);
@@ -29,15 +33,10 @@ void GainParameters::createAllParameters()
 
 void GainParameters::detachControls()
 {
-    if (pGainAttachment)
-    {
-        delete pGainAttachment;
-        pGainAttachment = nullptr;
-    }
+    gainAttachment.reset(nullptr);
 }
 
 void GainParameters::attachControls(Slider& gainSlider)
 {
-    detachControls();   // destroy existing attachments, if any
-    pGainAttachment = new SliderAttachment(valueTreeState, gainID, gainSlider);
+    gainAttachment.reset(new SliderAttachment(valueTreeState, gainID, gainSlider));
 }

@@ -6,6 +6,10 @@
               pluginCode="gain" pluginManufacturerCode="DRMc">
   <MAINGROUP id="XLUG4z" name="BasicGain">
     <GROUP id="{EBC3D5DD-DB9B-D529-7541-59B54C874793}" name="Source">
+      <FILE id="FUF1uj" name="CustomControls.cpp" compile="1" resource="0"
+            file="Source/CustomControls.cpp"/>
+      <FILE id="DULzz8" name="CustomControls.h" compile="0" resource="0"
+            file="Source/CustomControls.h"/>
       <FILE id="iR2NEE" name="GainParameters.cpp" compile="1" resource="0"
             file="Source/GainParameters.cpp"/>
       <FILE id="Gx2Bzf" name="GainParameters.h" compile="0" resource="0"

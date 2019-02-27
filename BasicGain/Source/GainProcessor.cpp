@@ -44,7 +44,6 @@ void GainProcessor::releaseResources()
 // Process one buffer ("block") of data
 void GainProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer&)
 {
-    // disable 
     ScopedNoDenormals noDenormals;
 
     // apply the same gain factor to all input channels for which there is an output channel
@@ -56,7 +55,7 @@ void GainProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer&)
 
         for (int i = 0; i < buffer.getNumSamples(); i++)
         {
-            *pOut++ = *pIn++ * parameters.gain;
+            *pOut++ = *pIn++ * parameters.linearGain;
         }
     }
     // clear any remaining/excess output channels to zero
@@ -69,14 +68,14 @@ void GainProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer&)
 // Called by the host when it needs to persist the current plugin state
 void GainProcessor::getStateInformation (MemoryBlock& destData)
 {
-    ScopedPointer<XmlElement> xml(valueTreeState.state.createXml());
+    std::unique_ptr<XmlElement> xml(valueTreeState.state.createXml());
     copyXmlToBinary(*xml, destData);
 }
 
 // Called by the host before processing, when it needs to restore a saved plugin state
 void GainProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
-    ScopedPointer<XmlElement> xml = getXmlFromBinary(data, sizeInBytes);
+    std::unique_ptr<XmlElement> xml(getXmlFromBinary(data, sizeInBytes));
     if (xml && xml->hasTagName(valueTreeState.state.getType()))
     {
         valueTreeState.state = ValueTree::fromXml(*xml);
