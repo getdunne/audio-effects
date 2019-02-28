@@ -40,7 +40,7 @@ void GainParameters::detachControls()
     gainAttachment.reset(nullptr);
 }
 
-void GainParameters::attachControls(Slider& gainSlider)
+void GainParameters::attachControls(Slider& gainKnob)
 {
-    gainAttachment.reset(new SliderAttachment(valueTreeState, gainID, gainSlider));
+    gainAttachment.reset(new SliderAttachment(valueTreeState, gainID, gainKnob));
 }

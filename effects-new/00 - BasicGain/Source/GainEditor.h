@@ -17,12 +17,15 @@ protected:
     void timerCallback() override;
 
 private:
-    SharedResourcePointer<MyLookAndFeel> lookAndFeel;
+    SharedResourcePointer<BasicLookAndFeel> lookAndFeel;
     GainProcessor& processor;
 
-    DecibelGainSlider gainSlider;
-
+    GroupComponent undoGroup;
     TextButton undoButton, redoButton;
+
+    GroupComponent gainGroup;
+    DecibelGainKnob gainKnob;
+    Label gainLabel;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GainEditor)
 };

@@ -1,6 +1,6 @@
 #include "CustomControls.h"
 
-MySlider::MySlider(float minValue, float maxValue)
+BasicKnob::BasicKnob(float minValue, float maxValue)
     : Slider()
 {
     fillColour = Colours::steelblue;
@@ -16,11 +16,11 @@ MySlider::MySlider(float minValue, float maxValue)
 
 // Change the look of JUCE's "rotary sliders" so they're more like traditional knobs. This code is adapted
 // from the example at https://www.juce.com/doc/tutorial_look_and_feel_customisation.
-void MyLookAndFeel::drawRotarySlider(Graphics& g, int x, int y, int width, int height, float sliderPos,
+void BasicLookAndFeel::drawRotarySlider(Graphics& g, int x, int y, int width, int height, float sliderPos,
     const float rotaryStartAngle, const float rotaryEndAngle,
     Slider& slider)
 {
-    auto theSlider = dynamic_cast<MySlider*>(&slider);
+    auto theSlider = dynamic_cast<BasicKnob*>(&slider);
     if (theSlider)
     {
         // basic geometry

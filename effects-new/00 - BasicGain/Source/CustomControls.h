@@ -1,13 +1,13 @@
 #pragma once
 #include "JuceHeader.h"
 
-class MySlider : public Slider
+class BasicKnob : public Slider
 {
-    friend class MyLookAndFeel;
+    friend class BasicLookAndFeel;
 
 public:
-    MySlider(float minValue, float maxValue);
-    virtual ~MySlider() = default;
+    BasicKnob(float minValue, float maxValue);
+    virtual ~BasicKnob() = default;
 
     void setFillColour(Colour c) { fillColour = c; }
     void setOutlineColour(Colour c) { outlineColour = c; }
@@ -17,10 +17,10 @@ protected:
     Colour fillColour, outlineColour, pointerColour;
     
 private:
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MySlider)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicKnob)
 };
 
-class MyLookAndFeel : public LookAndFeel_V4
+class BasicLookAndFeel : public LookAndFeel_V4
 {
 public:
     void drawRotarySlider(Graphics& g, int x, int y, int width, int height, float sliderPos,
@@ -30,11 +30,11 @@ public:
 
 // Adapted from JUCE Tutorial: Control audio levels using decibels
 // https://docs.juce.com/master/tutorial_synth_db_level_control.html
-class DecibelGainSlider : public MySlider
+class DecibelGainKnob : public BasicKnob
 {
 public:
-    DecibelGainSlider(float minDB, float maxDB, float minusInfDB=-100.0f)
-        : MySlider(minDB, maxDB)
+    DecibelGainKnob(float minDB, float maxDB, float minusInfDB=-100.0f)
+        : BasicKnob(minDB, maxDB)
         , minusInfinitydB(minusInfDB)
     {
     }
@@ -54,5 +54,5 @@ public:
 private:
     const float minusInfinitydB;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(DecibelGainSlider)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(DecibelGainKnob)
 };

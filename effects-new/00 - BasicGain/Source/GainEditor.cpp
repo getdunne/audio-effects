@@ -4,13 +4,12 @@
 GainEditor::GainEditor (GainProcessor& p)
     : AudioProcessorEditor (&p)
     , processor (p)
-    , gainSlider(-100.0f, 12.0f)
+    , gainKnob(-100.0f, 12.0f)
 {
     setLookAndFeel(lookAndFeel);
 
-    addAndMakeVisible(gainSlider);
-    gainSlider.setDoubleClickReturnValue(true, -6.0, ModifierKeys::noModifiers);
-    gainSlider.setFillColour(Colours::darkblue);
+    undoGroup.setText("Undo Management");
+    addAndMakeVisible(&undoGroup);
 
     undoButton.setButtonText(TRANS("Undo"));
     undoButton.onClick = [this]() { processor.undoManager.undo(); };
@@ -20,14 +19,24 @@ GainEditor::GainEditor (GainProcessor& p)
     redoButton.onClick = [this]() { processor.undoManager.redo(); };
     addAndMakeVisible(redoButton);
 
-    processor.parameters.attachControls(gainSlider);
+    gainGroup.setText("Gain Control");
+    addAndMakeVisible(&gainGroup);
+
+    addAndMakeVisible(gainKnob);
+    gainKnob.setDoubleClickReturnValue(true, -6.0, ModifierKeys::noModifiers);
+
+    gainLabel.setText("Gain", dontSendNotification);
+    gainLabel.setJustificationType(Justification::centred);
+    addAndMakeVisible(&gainLabel);
+
+    processor.parameters.attachControls(gainKnob);
     processor.undoManager.clearUndoHistory();
 
     // execute timer callback once immediately, then every 500ms thereafter
     timerCallback();
     startTimer(500);
 
-    setSize (400, 300);
+    setSize (300, 260);
 }
 
 GainEditor::~GainEditor()
@@ -39,11 +48,21 @@ GainEditor::~GainEditor()
 void GainEditor::resized()
 {
     auto bounds = getLocalBounds().reduced(20);
-    auto undoButtonStrip = bounds.removeFromTop(24);
-    auto buttonWidth = (undoButtonStrip.getWidth() - 20) / 2;
-    undoButton.setBounds(undoButtonStrip.removeFromLeft(buttonWidth));
-    redoButton.setBounds(undoButtonStrip.removeFromRight(buttonWidth));
-    gainSlider.setBounds(bounds.withSizeKeepingCentre(100, 100));
+
+    auto undoArea = bounds.removeFromTop(80);
+    undoGroup.setBounds(undoArea);
+    auto undoButtonsArea = undoArea.reduced(20);
+    undoButtonsArea.removeFromTop(10);
+    auto buttonWidth = (undoButtonsArea.getWidth() - 20) / 2;
+    undoButton.setBounds(undoButtonsArea.removeFromLeft(buttonWidth));
+    redoButton.setBounds(undoButtonsArea.removeFromRight(buttonWidth));
+
+    bounds.removeFromTop(10);
+    gainGroup.setBounds(bounds);
+    auto gainArea = bounds.reduced(10);
+    gainArea.removeFromTop(10);
+    gainLabel.setBounds(gainArea.removeFromBottom(20));
+    gainKnob.setBounds(gainArea);
 }
 
 void GainEditor::paint (Graphics& g)
