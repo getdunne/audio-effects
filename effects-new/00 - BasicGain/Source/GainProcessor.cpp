@@ -19,11 +19,9 @@ GainProcessor::GainProcessor()
                      .withInput  ("Input",  AudioChannelSet::stereo(), true)
                      .withOutput ("Output", AudioChannelSet::stereo(), true)
                      )
-    , valueTreeState(*this, &undoManager)
+    , valueTreeState(*this, &undoManager, Identifier(JucePlugin_Name), GainParameters::createParameterLayout())
     , parameters(valueTreeState)
 {
-    parameters.createAllParameters();
-    valueTreeState.state = ValueTree(Identifier(JucePlugin_Name));
 }
 
 // Destructor

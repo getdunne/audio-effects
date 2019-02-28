@@ -1,22 +1,23 @@
 #pragma once
 #include "JuceHeader.h"
 
-struct GainParameters
+class GainParameters
 {
+public:
     // Id's are symbolic names, Names are human-friendly names for GUI
     // Labels are supplementary, typically used for units of measure
     static const String gainID, gainName, gainLabel;
+    static AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
 
+public:
     GainParameters(AudioProcessorValueTreeState& vts);
     ~GainParameters();
 
-    void createAllParameters();
     void detachControls();
     void attachControls(Slider& levelSlider);
 
-    // dbGain is used by the AudioProcessorValueTreeState and Attachments
     // linearGain is used by our processor, converted as needed by our Listener
-    float dbGain, linearGain;
+    float linearGain;
 
 private:
     // Reference to AudioProcessorValueTreeState object that owns the parameter objects

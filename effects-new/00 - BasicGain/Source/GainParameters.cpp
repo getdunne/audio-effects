@@ -6,29 +6,33 @@ const String GainParameters::gainID = "gain";
 const String GainParameters::gainName = TRANS("Gain");
 const String GainParameters::gainLabel = TRANS("dB");
 
+AudioProcessorValueTreeState::ParameterLayout GainParameters::createParameterLayout()
+{
+    std::vector<std::unique_ptr<RangedAudioParameter>> params;
+
+    params.push_back(std::make_unique<AudioParameterFloat>(
+        gainID, gainName,
+        NormalisableRange<float>(-100.0f, 12.0f), 0.0f,
+        gainLabel,
+        AudioProcessorParameter::genericParameter,
+        [](float value, int maxLength) { return String(value).substring(0, maxLength); },
+        [](const String& text) { return text.getFloatValue(); }));
+
+    return { params.begin(), params.end() };
+}
+
 GainParameters::GainParameters(AudioProcessorValueTreeState& vts)
-    : dbGain(0.0f), linearGain(1.0f)
+    : linearGain(1.0f)
     , valueTreeState(vts)
     , gainListener(linearGain, -100.0f)
 {
+    valueTreeState.addParameterListener(gainID, &gainListener);
 }
 
 GainParameters::~GainParameters()
 {
     detachControls();
     valueTreeState.removeParameterListener(gainID, &gainListener);
-}
-
-void GainParameters::createAllParameters()
-{
-    // gain: float parameter, range -100.0 t0 +12.0 dB
-    valueTreeState.createAndAddParameter(std::make_unique<AudioProcessorValueTreeState::Parameter>(
-        gainID, gainName, gainLabel,
-        NormalisableRange<float>(-100.0f, 12.0f),
-        dbGain,
-        [](float value) { return String(value); },
-        [](const String& text) { return text.getFloatValue(); }) );
-    valueTreeState.addParameterListener(gainID, &gainListener);
 }
 
 void GainParameters::detachControls()
