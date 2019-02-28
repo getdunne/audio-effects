@@ -4,7 +4,7 @@
 GainEditor::GainEditor (GainProcessor& p)
     : AudioProcessorEditor (&p)
     , processor (p)
-    , gainKnob(-100.0f, 12.0f)
+    , gainKnob("Gain", -100.0f, 12.0f)
 {
     setLookAndFeel(lookAndFeel);
 
@@ -25,14 +25,10 @@ GainEditor::GainEditor (GainProcessor& p)
     addAndMakeVisible(gainKnob);
     gainKnob.setDoubleClickReturnValue(true, -6.0, ModifierKeys::noModifiers);
 
-    gainLabel.setText("Gain", dontSendNotification);
-    gainLabel.setJustificationType(Justification::centred);
-    addAndMakeVisible(&gainLabel);
-
     processor.parameters.attachControls(gainKnob);
     processor.undoManager.clearUndoHistory();
 
-    // execute timer callback once immediately, then every 500ms thereafter
+    // For Undo: execute timer callback once immediately, then every 500ms thereafter
     timerCallback();
     startTimer(500);
 
@@ -61,7 +57,6 @@ void GainEditor::resized()
     gainGroup.setBounds(bounds);
     auto gainArea = bounds.reduced(10);
     gainArea.removeFromTop(10);
-    gainLabel.setBounds(gainArea.removeFromBottom(20));
     gainKnob.setBounds(gainArea);
 }
 

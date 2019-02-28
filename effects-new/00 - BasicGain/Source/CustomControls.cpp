@@ -1,18 +1,62 @@
 #include "CustomControls.h"
 
-BasicKnob::BasicKnob(float minValue, float maxValue)
+BasicKnob::BasicKnob(const String& labelText, float minValue, float maxValue)
     : Slider()
+    , label(labelText)
 {
     fillColour = Colours::steelblue;
     outlineColour = Colours::slategrey;
     pointerColour = Colours::lightblue;
 
     setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
-    setTextBoxStyle(Slider::NoTextBox, false, 0, 0);
-    setPopupDisplayEnabled(true, true, 0);
+    setTextBoxStyle(Slider::TextBoxBelow, false, 120, 20);
 
     setRange(minValue, maxValue);
+
+    addAndMakeVisible(&label);
 }
+
+void BasicKnob::resized()
+{
+    Slider::resized();
+
+    int knobWidth = jmin(getWidth(), getHeight()) - 20;
+    int width = jmax(knobWidth, getTextBoxWidth());
+    mouseBounds = getLocalBounds().withSizeKeepingCentre(width, getHeight());
+
+    label.setBounds(getLocalBounds().removeFromBottom(20).withSizeKeepingCentre(getTextBoxWidth(), 20));
+}
+
+void BasicKnob::mouseEnter(const MouseEvent&)
+{
+    DBG("mouseEnter");
+}
+
+void BasicKnob::mouseExit(const MouseEvent& evt)
+{
+    DBG("mouseExit");
+    bool mouseInLabel = label.getBounds().contains(evt.getPosition());
+    label.setVisible(!mouseInLabel);
+}
+
+void BasicKnob::mouseMove(const MouseEvent& evt)
+{
+    label.setVisible(!mouseBounds.contains(evt.getPosition()));
+}
+
+BasicKnob::OpaqueLabel::OpaqueLabel(const String& labelText)
+    : Label()
+{
+    setText(labelText, dontSendNotification);
+    setJustificationType(Justification::centred);
+}
+
+void BasicKnob::OpaqueLabel::paint(Graphics& g)
+{
+    g.fillAll(getLookAndFeel().findColour(ResizableWindow::backgroundColourId));
+    Label::paint(g);
+}
+
 
 // Change the look of JUCE's "rotary sliders" so they're more like traditional knobs. This code is adapted
 // from the example at https://www.juce.com/doc/tutorial_look_and_feel_customisation.

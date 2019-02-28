@@ -2,7 +2,7 @@
 
 <JUCERPROJECT id="Q6ptnT" name="BasicGain" projectType="audioplug" jucerVersion="5.4.3"
               projectLineFeed="&#10;" companyName="Dunne-Reiss-McPherson" reportAppUsage="0"
-              displaySplashScreen="0" pluginFormats="buildAU,buildVST,buildVST3"
+              displaySplashScreen="0" pluginFormats="buildAU,buildStandalone,buildVST,buildVST3"
               pluginCode="gain" pluginManufacturerCode="DRMc">
   <MAINGROUP id="XLUG4z" name="BasicGain">
     <GROUP id="{EBC3D5DD-DB9B-D529-7541-59B54C874793}" name="Source">
