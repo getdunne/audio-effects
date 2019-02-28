@@ -33,4 +33,4 @@ In an *AudioProcessorValueTreeState*, every plug-in parameter has three unique *
 
 **AudioProcessorValueTreeState** defines several "attachment" classes, which effectively link ("attach") parameters to GUI controls. In *BasicGain*, a single **SliderAttachment** object is used. Because this object must be created when the GUI is instantiated, and destroyed when the GUI is deleted, a *std::unique_ptr* member (called *gainAttachment*) is used. The *GainParameters* class has function members *attachControls()* and *detachControls()* which manage this creation/destruction of attachment objects.
 
-The *BasicGain* effect has only a single float-valued parameter, but the basic code structure of the *GainParameters* class can easily be extended to handle many parameters of various types. All of the effect projects have a comparably-structured "parameteters" class.
+The *BasicGain* effect has only a single float-valued parameter, but the basic code structure of the *GainParameters* class can be extended to handle many parameters of various types. All of the effect projects have a comparably-structured "parameters" class.
