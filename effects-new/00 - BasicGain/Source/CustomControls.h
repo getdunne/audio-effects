@@ -7,16 +7,9 @@ class BasicKnob : public Slider
     friend class BasicLookAndFeel;
 
 public:
-    BasicKnob(const String& labelText, float minValue, float maxValue);
+    BasicKnob(float minValue, float maxValue);
     virtual ~BasicKnob() = default;
 
-    // Component
-    void resized() override;
-    void mouseEnter(const MouseEvent&) override;
-    void mouseExit(const MouseEvent&) override;
-    void mouseMove(const MouseEvent&) override;
-
-    // BasicKnob
     void setFillColour(Colour c) { fillColour = c; }
     void setOutlineColour(Colour c) { outlineColour = c; }
     void setPointerColour(Colour c) { pointerColour = c; }
@@ -24,19 +17,6 @@ public:
 protected:
     Colour fillColour, outlineColour, pointerColour;
 
-    // geometry
-    Rectangle<int> mouseBounds;
-
-    class OpaqueLabel : public Label
-    {
-    public:
-        OpaqueLabel(const String& labelText);
-        virtual ~OpaqueLabel() = default;
-        
-        void paint(Graphics&) override;
-    };
-    OpaqueLabel label;
-    
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicKnob)
 };
@@ -54,8 +34,8 @@ public:
 class DecibelGainKnob : public BasicKnob
 {
 public:
-    DecibelGainKnob(const String& labelText, float minDB, float maxDB, float minusInfDB=-100.0f)
-        : BasicKnob(labelText, minDB, maxDB)
+    DecibelGainKnob(float minDB, float maxDB, float minusInfDB=-100.0f)
+        : BasicKnob(minDB, maxDB)
         , minusInfinitydB(minusInfDB)
     {
     }
@@ -70,6 +50,7 @@ public:
 
     String getTextFromValue(double value) override
     {
+        if (value == 0.0) return "0.0 dB";
         return Decibels::toString(value);
     }
 
@@ -79,18 +60,41 @@ private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(DecibelGainKnob)
 };
 
-class LabeledKnob : public Component, protected MouseListener
+class LabeledKnob : public Component, protected Timer
 {
+    friend class LKMouseListener;
+
 public:
-    LabeledKnob();
+    LabeledKnob(const String& lblText, BasicKnob& theKnob);
     virtual ~LabeledKnob();
 
-    void mouseEnter(const MouseEvent&) override;
-    void mouseExit(const MouseEvent&) override;
-    void mouseMove(const MouseEvent&) override;
+    void resized() override;
 
 protected:
+    void timerCallback() override;
+    void clearMouseOvers();
+    void updateMouseOvers(const MouseEvent&);
+    void updateLabel(const MouseEvent&);
 
 private:
+    BasicKnob& knob;
+    Label label;
+    String labelText;
+    bool mouseOverKnob, mouseOverLabel;
+
+    class LKMouseListener : public MouseListener
+    {
+    public:
+        LKMouseListener(LabeledKnob& lk) : owner(lk) {}
+
+        void mouseEnter(const MouseEvent&) override;
+        void mouseExit(const MouseEvent&) override;
+        void mouseMove(const MouseEvent&) override;
+
+    private:
+        LabeledKnob& owner;
+    };
+    LKMouseListener mouseListener;
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(LabeledKnob)
 };

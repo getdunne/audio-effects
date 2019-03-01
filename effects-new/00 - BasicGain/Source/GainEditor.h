@@ -25,6 +25,7 @@ private:
 
     GroupComponent gainGroup;
     DecibelGainKnob gainKnob;
+    LabeledKnob labeledGainKnob;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GainEditor)
 };

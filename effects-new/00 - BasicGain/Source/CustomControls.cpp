@@ -1,60 +1,110 @@
 #include "CustomControls.h"
 
-BasicKnob::BasicKnob(const String& labelText, float minValue, float maxValue)
+BasicKnob::BasicKnob(float minValue, float maxValue)
     : Slider()
-    , label(labelText)
 {
     fillColour = Colours::steelblue;
     outlineColour = Colours::slategrey;
     pointerColour = Colours::lightblue;
 
+    setTextBoxStyle(NoTextBox, false, 0, 0);
     setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
-    setTextBoxStyle(Slider::TextBoxBelow, false, 120, 20);
-
     setRange(minValue, maxValue);
+}
 
+LabeledKnob::LabeledKnob(const String& lblText, BasicKnob& theKnob)
+    : knob(theKnob)
+    , labelText(lblText)
+    , mouseOverKnob(false)
+    , mouseOverLabel(false)
+    , mouseListener(*this)
+{
+    addAndMakeVisible(&knob);
+    label.setText(labelText, dontSendNotification);
+    label.setJustificationType(Justification::centred);
+    label.setEditable(false, true, true);
     addAndMakeVisible(&label);
+    addMouseListener(&mouseListener, true);
+
+    knob.onValueChange = [this]()
+    {
+        if (mouseOverKnob || mouseOverLabel)
+        {
+            String vs = knob.getTextFromValue(knob.getValue());
+            label.setText(vs, dontSendNotification);
+            startTimer(3000);
+        }
+    };
+
+    label.onTextChange = [this]()
+    {
+        knob.setValue(knob.getValueFromText(label.getText()));
+    };
 }
 
-void BasicKnob::resized()
+LabeledKnob::~LabeledKnob()
 {
-    Slider::resized();
-
-    int knobWidth = jmin(getWidth(), getHeight()) - 20;
-    int width = jmax(knobWidth, getTextBoxWidth());
-    mouseBounds = getLocalBounds().withSizeKeepingCentre(width, getHeight());
-
-    label.setBounds(getLocalBounds().removeFromBottom(20).withSizeKeepingCentre(getTextBoxWidth(), 20));
+    removeMouseListener(&mouseListener);
 }
 
-void BasicKnob::mouseEnter(const MouseEvent&)
+void LabeledKnob::resized()
 {
-    DBG("mouseEnter");
+    auto bounds = getLocalBounds();
+    label.setBounds(bounds.removeFromBottom(20));
+    knob.setBounds(bounds);
 }
 
-void BasicKnob::mouseExit(const MouseEvent& evt)
+void LabeledKnob::timerCallback()
 {
-    DBG("mouseExit");
-    bool mouseInLabel = label.getBounds().contains(evt.getPosition());
-    label.setVisible(!mouseInLabel);
+    if (!mouseOverKnob && !mouseOverLabel && !label.isBeingEdited())
+    {
+        stopTimer();
+        label.setText(labelText, dontSendNotification);
+    }
 }
 
-void BasicKnob::mouseMove(const MouseEvent& evt)
+void LabeledKnob::clearMouseOvers()
 {
-    label.setVisible(!mouseBounds.contains(evt.getPosition()));
+    mouseOverKnob = false;
+    mouseOverLabel = false;
 }
 
-BasicKnob::OpaqueLabel::OpaqueLabel(const String& labelText)
-    : Label()
+void LabeledKnob::updateMouseOvers(const MouseEvent& evt)
 {
-    setText(labelText, dontSendNotification);
-    setJustificationType(Justification::centred);
+    MouseEvent mevt = evt.getEventRelativeTo(this);
+    int knobDiameter = jmin(knob.getWidth(), knob.getHeight()) - 20;
+    Rectangle<int> knobRect = knob.getBounds().withSizeKeepingCentre(knobDiameter, knobDiameter);
+    knobRect.setHeight(knobDiameter + 10);
+    mouseOverKnob = knobRect.contains(mevt.getPosition());
+    mouseOverLabel = label.getBounds().contains(mevt.getPosition());
 }
 
-void BasicKnob::OpaqueLabel::paint(Graphics& g)
+void LabeledKnob::updateLabel(const MouseEvent& evt)
 {
-    g.fillAll(getLookAndFeel().findColour(ResizableWindow::backgroundColourId));
-    Label::paint(g);
+    updateMouseOvers(evt);
+    if (label.isBeingEdited()) return;
+
+    if (mouseOverKnob || mouseOverLabel)
+    {
+        label.setText(knob.getTextFromValue(knob.getValue()), dontSendNotification);
+    }
+    else startTimer(3000);
+}
+
+void LabeledKnob::LKMouseListener::mouseEnter(const MouseEvent& evt)
+{
+    owner.updateLabel(evt);
+}
+
+void LabeledKnob::LKMouseListener::mouseExit(const MouseEvent&)
+{
+    owner.clearMouseOvers();
+    owner.timerCallback();
+}
+
+void LabeledKnob::LKMouseListener::mouseMove(const MouseEvent& evt)
+{
+    owner.updateLabel(evt);
 }
 
 

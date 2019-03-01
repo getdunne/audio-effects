@@ -4,7 +4,8 @@
 GainEditor::GainEditor (GainProcessor& p)
     : AudioProcessorEditor (&p)
     , processor (p)
-    , gainKnob("Gain", -100.0f, 12.0f)
+    , gainKnob(-100.0f, 12.0f)
+    , labeledGainKnob("Gain", gainKnob)
 {
     setLookAndFeel(lookAndFeel);
 
@@ -22,8 +23,8 @@ GainEditor::GainEditor (GainProcessor& p)
     gainGroup.setText("Gain Control");
     addAndMakeVisible(&gainGroup);
 
-    addAndMakeVisible(gainKnob);
-    gainKnob.setDoubleClickReturnValue(true, -6.0, ModifierKeys::noModifiers);
+    gainKnob.setDoubleClickReturnValue(true, 0.0, ModifierKeys::noModifiers);
+    addAndMakeVisible(labeledGainKnob);
 
     processor.parameters.attachControls(gainKnob);
     processor.undoManager.clearUndoHistory();
@@ -57,7 +58,7 @@ void GainEditor::resized()
     gainGroup.setBounds(bounds);
     auto gainArea = bounds.reduced(10);
     gainArea.removeFromTop(10);
-    gainKnob.setBounds(gainArea);
+    labeledGainKnob.setBounds(gainArea);
 }
 
 void GainEditor::paint (Graphics& g)
