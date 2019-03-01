@@ -1,7 +1,8 @@
 #pragma once
 #include "JuceHeader.h"
 #include "GainProcessor.h"
-#include "CustomControls.h"
+#include "LabeledKnob.h"
+#include "DecibelKnob.h"
 
 class GainEditor  : public AudioProcessorEditor, protected Timer
 {
@@ -24,7 +25,7 @@ private:
     TextButton undoButton, redoButton;
 
     GroupComponent gainGroup;
-    DecibelGainKnob gainKnob;
+    DecibelKnob gainKnob;
     LabeledKnob labeledGainKnob;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GainEditor)
