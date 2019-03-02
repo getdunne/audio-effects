@@ -37,8 +37,8 @@ These effects naturally group into the following taxonomy, roughly in order of i
    * Delay
    * Ping-Pong Delay
    * Vibrato
-   * Chorus
    * Flanger
+   * Chorus
   
  * **Reverberation** (R&M Chapter 11)
    * Reverb
