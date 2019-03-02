@@ -42,5 +42,6 @@ void GainParameters::detachControls()
 
 void GainParameters::attachControls(Slider& gainKnob)
 {
-    gainAttachment.reset(new SliderAttachment(valueTreeState, gainID, gainKnob));
+    using SlAt = AudioProcessorValueTreeState::SliderAttachment;
+    gainAttachment.reset(new SlAt(valueTreeState, gainID, gainKnob));
 }

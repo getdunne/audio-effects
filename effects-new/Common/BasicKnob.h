@@ -12,15 +12,21 @@ class BasicKnob : public Slider
     friend class BasicLookAndFeel;
 
 public:
-    BasicKnob(float minValue, float maxValue);
+    BasicKnob(float minValue, float maxValue, const String& unit = {});
     virtual ~BasicKnob() = default;
 
+    // Slider
+    double getValueFromText(const String& text) override;
+    String getTextFromValue(double value) override;
+
+    // BasicKnob
     void setFillColour(Colour c) { fillColour = c; }
     void setOutlineColour(Colour c) { outlineColour = c; }
     void setPointerColour(Colour c) { pointerColour = c; }
 
 protected:
     Colour fillColour, outlineColour, pointerColour;
+    String unitOfMeasure;
 
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicKnob)

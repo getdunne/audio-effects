@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="Q6ptnT" name="BasicGain" projectType="audioplug" jucerVersion="5.4.3"
+<JUCERPROJECT id="Q6ptnT" name="Tremolo" projectType="audioplug" jucerVersion="5.4.3"
               projectLineFeed="&#10;" companyName="Dunne-Reiss-McPherson" reportAppUsage="0"
               displaySplashScreen="0" pluginFormats="buildAU,buildStandalone,buildVST,buildVST3"
-              pluginCode="gain" pluginManufacturerCode="DRMc" headerPath="../../../Common">
-  <MAINGROUP id="XLUG4z" name="BasicGain">
+              pluginCode="tmlo" pluginManufacturerCode="DRMc" headerPath="../../../Common">
+  <MAINGROUP id="XLUG4z" name="Tremolo">
     <GROUP id="{793AEF3A-0BE5-37F1-F738-D60ED373C5A4}" name="Common">
       <FILE id="HSyPE2" name="BasicKnob.cpp" compile="1" resource="0" file="../Common/BasicKnob.cpp"/>
       <FILE id="lDsiFs" name="BasicKnob.h" compile="0" resource="0" file="../Common/BasicKnob.h"/>
@@ -12,19 +12,23 @@
       <FILE id="fYvVWy" name="DecibelKnob.h" compile="0" resource="0" file="../Common/DecibelKnob.h"/>
       <FILE id="Rtbgty" name="LabeledKnob.cpp" compile="1" resource="0" file="../Common/LabeledKnob.cpp"/>
       <FILE id="IabbTH" name="LabeledKnob.h" compile="0" resource="0" file="../Common/LabeledKnob.h"/>
-      <FILE id="REhL65" name="ParameterListeners.h" compile="0" resource="0"
+      <FILE id="XsQKsv" name="LFO.cpp" compile="1" resource="0" file="../Common/LFO.cpp"/>
+      <FILE id="XZkU2b" name="LFO.h" compile="0" resource="0" file="../Common/LFO.h"/>
+      <FILE id="uP8nXN" name="ParameterListeners.h" compile="0" resource="0"
             file="../Common/ParameterListeners.h"/>
     </GROUP>
     <GROUP id="{EBC3D5DD-DB9B-D529-7541-59B54C874793}" name="Source">
-      <FILE id="iR2NEE" name="GainParameters.cpp" compile="1" resource="0"
-            file="Source/GainParameters.cpp"/>
-      <FILE id="Gx2Bzf" name="GainParameters.h" compile="0" resource="0"
-            file="Source/GainParameters.h"/>
-      <FILE id="ZQ5I9P" name="GainProcessor.cpp" compile="1" resource="0"
-            file="Source/GainProcessor.cpp"/>
-      <FILE id="ufoDc9" name="GainProcessor.h" compile="0" resource="0" file="Source/GainProcessor.h"/>
-      <FILE id="xYYBL0" name="GainEditor.cpp" compile="1" resource="0" file="Source/GainEditor.cpp"/>
-      <FILE id="T9ILHq" name="GainEditor.h" compile="0" resource="0" file="Source/GainEditor.h"/>
+      <FILE id="g4iOGt" name="TremoloEditor.cpp" compile="1" resource="0"
+            file="Source/TremoloEditor.cpp"/>
+      <FILE id="EcKU91" name="TremoloEditor.h" compile="0" resource="0" file="Source/TremoloEditor.h"/>
+      <FILE id="BAUZMC" name="TremoloParameters.cpp" compile="1" resource="0"
+            file="Source/TremoloParameters.cpp"/>
+      <FILE id="xxjoG1" name="TremoloParameters.h" compile="0" resource="0"
+            file="Source/TremoloParameters.h"/>
+      <FILE id="jXdG2u" name="TremoloProcessor.cpp" compile="1" resource="0"
+            file="Source/TremoloProcessor.cpp"/>
+      <FILE id="fj7MFn" name="TremoloProcessor.h" compile="0" resource="0"
+            file="Source/TremoloProcessor.h"/>
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>

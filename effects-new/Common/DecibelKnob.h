@@ -13,6 +13,7 @@ public:
     DecibelKnob(float minDB, float maxDB, float minusInfDB=-100.0f);
     virtual ~DecibelKnob() = default;
 
+    // Slider
     double getValueFromText(const String& text) override;
     String getTextFromValue(double value) override;
 

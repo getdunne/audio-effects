@@ -1,7 +1,8 @@
 #include "BasicKnob.h"
 
-BasicKnob::BasicKnob(float minValue, float maxValue)
+BasicKnob::BasicKnob(float minValue, float maxValue, const String& unit)
     : Slider()
+    , unitOfMeasure(unit)
 {
     fillColour = Colours::steelblue;
     outlineColour = Colours::slategrey;
@@ -11,6 +12,20 @@ BasicKnob::BasicKnob(float minValue, float maxValue)
     setSliderStyle(Slider::RotaryHorizontalVerticalDrag);
     setRange(minValue, maxValue);
 }
+
+double BasicKnob::getValueFromText(const String& text)
+{
+    auto valueText = text.upToFirstOccurrenceOf(" ", false, false).trim();
+    return valueText.getDoubleValue();
+}
+
+String BasicKnob::getTextFromValue(double value)
+{
+    String text = String(value);
+    if (unitOfMeasure.isNotEmpty()) text += " " + unitOfMeasure;
+    return text;
+}
+
 
 // Change the look of JUCE's "rotary sliders" so they're more like traditional knobs. This code is adapted
 // from the example at https://www.juce.com/doc/tutorial_look_and_feel_customisation.
