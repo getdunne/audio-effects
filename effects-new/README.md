@@ -15,6 +15,39 @@ The *Common* folder contains code which is common to all the individual projects
 ## BasicGain
 The **BasicGain** effect is the simplest JUCE audio plug-in which performs a parameter-driven transformation on an audio stream. It's essentially the original "Empty" effect, updated for the JUCE 5.4.x framework. Study this code first, to understand the "boilerplate" you'll see (in expanded form) in all of the other projects. See the *README.md* in the *00 - BasicGain* folder for details.
 
+## Effect categories
+These effects naturally group into the following taxonomy, roughly in order of increasing complexity:
+
+ * Amplitude modulation effects
+   * BasicGain
+   * Tremolo
+   * Ring Modulator
+   * Compressor
+
+ * Wave shaping effects
+   * Distortion
+
+ * Filter-based effects
+   * Wah-wah
+   * Auto-wah
+   * Parametric EQ
+   * Phaser
+
+ * Delay-based effects
+   * Delay
+   * Ping-Pong Delay
+   * Vibrato
+   * Chorus
+   * Flanger
+  
+ * Reverberation
+   * Reverb
+
+ * Phase-vocoder effects
+   * Pitch shifter
+   * Robot voice
+
+
 ## A note on the Projucer
 The JUCE Projucer is a tremendously useful tool for generating new JUCE projects according to a consistent pattern. It uses code templates to generate "Processor" and "Editor" code files from scratch, but subsequently, you can edit and even rename these files, and the Projucer will leave them alone even if you re-open the *.jucer* file, make configuration changes, and re-save.
 
