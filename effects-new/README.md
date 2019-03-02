@@ -18,34 +18,34 @@ The **BasicGain** effect is the simplest JUCE audio plug-in which performs a par
 ## Effect categories
 These effects naturally group into the following taxonomy, roughly in order of increasing complexity:
 
- * Amplitude modulation effects
+ * **Amplitude modulation effects** (R&M Chapter 5)
    * BasicGain
    * Tremolo
    * Ring Modulator
    * Compressor
 
- * Wave shaping effects
+ * **Wave shaping effects** (R&M Chapter 7)
    * Distortion
 
- * Filter-based effects
+ * **Filter-based effects** (R&M Chapter 4)
+   * Parametric EQ
    * Wah-wah
    * Auto-wah
-   * Parametric EQ
    * Phaser
 
- * Delay-based effects
+ * **Delay-line effects** (R&M Chapter 2)
    * Delay
    * Ping-Pong Delay
    * Vibrato
    * Chorus
    * Flanger
   
- * Reverberation
+ * **Reverberation** (R&M Chapter 11)
    * Reverb
 
- * Phase-vocoder effects
+ * **Phase-vocoder effects** (R&M Chapter 8)
    * Pitch shifter
-   * Robot voice
+   * Robot-voice effect
 
 
 ## A note on the Projucer
