@@ -1,6 +1,5 @@
 #pragma once
 #include "JuceHeader.h"
-#include "LFO.h"
 
 struct BoolListener : public AudioProcessorValueTreeState::Listener
 {
@@ -53,14 +52,16 @@ struct FloatDecibelListener : public AudioProcessorValueTreeState::Listener
     }
 };
 
-// This specialized AudioProcessorValueTreeState::Listener converts a 0-based integer to LFO::Waveform
+// This specialized AudioProcessorValueTreeState::Listener converts a 0-based integer to LFO::Waveform.
+// Because we have multiple LFO classes with different Waveform enums, we use a templatized declaration.
+template <typename Waveform>
 struct WaveformListener : public AudioProcessorValueTreeState::Listener
 {
-    LFO::Waveform& waveform;
+    Waveform& waveform;
 
-    WaveformListener(LFO::Waveform& wf) : AudioProcessorValueTreeState::Listener(), waveform(wf) {}
+    WaveformListener(Waveform& wf) : AudioProcessorValueTreeState::Listener(), waveform(wf) {}
     void parameterChanged(const String&, float newValue) override
     {
-        waveform = (LFO::Waveform)(int(newValue + 0.5f));
+        waveform = (Waveform)(int(newValue + 0.5f));
     }
 };

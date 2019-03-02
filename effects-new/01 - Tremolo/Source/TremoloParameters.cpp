@@ -18,7 +18,7 @@ AudioProcessorValueTreeState::ParameterLayout TremoloParameters::createParameter
 
     params.push_back(std::make_unique<AudioParameterInt>(
         lfoWaveformID, lfoWaveformName,
-        0, int(LFO::kNumWaveforms) - 1, int(LFO::kWaveformSine),
+        0, int(LFO_1::kNumWaveforms) - 1, int(LFO_1::kWaveformSine),
         lfoWaveformLabel,
         [](int value, int maxLength) { return String(value).substring(0, maxLength); },
         [](const String& text) { return text.getIntValue(); }));
@@ -43,7 +43,7 @@ AudioProcessorValueTreeState::ParameterLayout TremoloParameters::createParameter
 }
 
 TremoloParameters::TremoloParameters(AudioProcessorValueTreeState& vts)
-    : lfoWaveform(LFO::kWaveformSine)
+    : lfoWaveform(LFO_1::kWaveformSine)
     , lfoFreqHz(1.0f)
     , modDepth(0.5f)
     , valueTreeState(vts)

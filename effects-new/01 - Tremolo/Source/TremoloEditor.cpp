@@ -1,5 +1,6 @@
 #include "TremoloProcessor.h"
 #include "TremoloEditor.h"
+#include "LFO_1.h"
 
 TremoloEditor::TremoloEditor (TremoloProcessor& p)
     : AudioProcessorEditor (&p)
@@ -20,7 +21,7 @@ TremoloEditor::TremoloEditor (TremoloProcessor& p)
 
     lfoWaveformCombo.setEditableText(false);
     lfoWaveformCombo.setJustificationType(Justification::centredLeft);
-    LFO::populateWaveformComboBox(lfoWaveformCombo);
+    LFO_1::populateWaveformComboBox(lfoWaveformCombo);
     addAndMakeVisible(lfoWaveformCombo);
 
     lfoFreqKnob.setDoubleClickReturnValue(true, 1.0f, ModifierKeys::noModifiers);

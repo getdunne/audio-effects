@@ -48,7 +48,9 @@ These effects naturally group into the following taxonomy, roughly in order of i
    * Robot-voice effect
 
 
-## A note on the Projucer
+## Notes on the Projucer
 The JUCE Projucer is a tremendously useful tool for generating new JUCE projects according to a consistent pattern. It uses code templates to generate "Processor" and "Editor" code files from scratch, but subsequently, you can edit and even rename these files, and the Projucer will leave them alone even if you re-open the *.jucer* file, make configuration changes, and re-save.
 
-Because of this, and because I don't much like the Projucer's internal code templates, I tend to use the Projucer to "clone" and rename an existing project whenever possible. For example, I created the **Tremolo** project by cloning and renaming the **BasicGain** project. I had to rename the "processor", "editor", and "parameters" code files manually, and use global search/replace in a text editor to rename the corresponding classes and variables, but this approach is still a great time-saver when you are creating a family of highly similar code projects.
+Because of this, I tend to use the Projucer to "clone" (copy) and rename an existing project whenever possible. For example, I created the **Tremolo** project by cloning and renaming the **BasicGain** project. I had to rename the "processor", "editor", and "parameters" code files manually, and use global search/replace in a text editor or IDE to rename the corresponding classes and variables, but this approach is still a great time-saver when you are creating a family of highly similar code projects.
+
+When copying a project in order to clone it, you need only copy the *.jucer* file and the *Source* folder. To rename source files in the Projucer, select e.g the *.cpp* file, right-click and choose "rename", edit the name and hit Return/Enter. The Projucer will then ask if you want to rename the *.h* file similarly; confirm that you do.

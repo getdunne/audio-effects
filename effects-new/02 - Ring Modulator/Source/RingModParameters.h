@@ -1,41 +1,46 @@
 #pragma once
 #include "JuceHeader.h"
 #include "ParameterListeners.h"
-#include "LFO_1.h"
+#include "LFO_2.h"
 
-class TremoloParameters
+class RingModParameters
 {
 public:
     // Id's are symbolic names, Names are human-friendly names for GUI
     // Labels are supplementary, typically used for units of measure
+    static const String carrierFreqID, carrierFreqName, carrierFreqLabel;
     static const String lfoWaveformID, lfoWaveformName, lfoWaveformLabel;
     static const String lfoFreqID, lfoFreqName, lfoFreqLabel;
-    static const String modDepthID, modDepthName, modDepthLabel;
+    static const String lfoWidthID, lfoWidthName, lfoWidthLabel;
     static AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
 
 public:
-    TremoloParameters(AudioProcessorValueTreeState& vts);
-    ~TremoloParameters();
+    RingModParameters(AudioProcessorValueTreeState& vts);
+    ~RingModParameters();
 
     void detachControls();
-    void attachControls(ComboBox& lfoWaveformCombo, Slider& lfoFreqKnob, Slider& modDepthKnob);
+    void attachControls(Slider& carrierFreqKnob,
+                        ComboBox& lfoWaveformCombo, Slider& lfoFreqKnob, Slider& lfoWidthKnob);
 
     // working parameter values
-    LFO_1::Waveform lfoWaveform;
+    float carrierFreqHz;
+    LFO_2::Waveform lfoWaveform;
     float lfoFreqHz;
-    float modDepth;
+    float lfoWidthHz;
 
 private:
     // Reference to AudioProcessorValueTreeState object that owns the parameter objects
     AudioProcessorValueTreeState& valueTreeState;
 
     // Attachment objects link GUI controls to parameters
+    std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> carrierFreqAttachment;
     std::unique_ptr<AudioProcessorValueTreeState::ComboBoxAttachment> lfoWaveformAttachment;
     std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> lfoFreqAttachment;
-    std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> modDepthAttachment;
+    std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> lfoWidthAttachment;
 
     // Listener objects link parameters to working variables
-    WaveformListener<LFO_1::Waveform> lfoWaveformListener;
+    FloatListener carrierFreqListener;
+    WaveformListener<LFO_2::Waveform> lfoWaveformListener;
     FloatListener lfoFreqListener;
-    FloatListener modDepthListener;
+    FloatListener lfoWidthListener;
 };

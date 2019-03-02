@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="Q6ptnT" name="Tremolo" projectType="audioplug" jucerVersion="5.4.3"
+<JUCERPROJECT id="Q6ptnT" name="RingMod" projectType="audioplug" jucerVersion="5.4.3"
               projectLineFeed="&#10;" companyName="Dunne-Reiss-McPherson" reportAppUsage="0"
               displaySplashScreen="0" pluginFormats="buildAU,buildStandalone,buildVST,buildVST3"
               pluginCode="tmlo" pluginManufacturerCode="DRMc" headerPath="../../../Common">
-  <MAINGROUP id="XLUG4z" name="Tremolo">
+  <MAINGROUP id="XLUG4z" name="RingMod">
     <GROUP id="{793AEF3A-0BE5-37F1-F738-D60ED373C5A4}" name="Common">
       <FILE id="HSyPE2" name="BasicKnob.cpp" compile="1" resource="0" file="../Common/BasicKnob.cpp"/>
       <FILE id="lDsiFs" name="BasicKnob.h" compile="0" resource="0" file="../Common/BasicKnob.h"/>
@@ -12,23 +12,23 @@
       <FILE id="fYvVWy" name="DecibelKnob.h" compile="0" resource="0" file="../Common/DecibelKnob.h"/>
       <FILE id="Rtbgty" name="LabeledKnob.cpp" compile="1" resource="0" file="../Common/LabeledKnob.cpp"/>
       <FILE id="IabbTH" name="LabeledKnob.h" compile="0" resource="0" file="../Common/LabeledKnob.h"/>
-      <FILE id="HO6yKV" name="LFO_1.cpp" compile="1" resource="0" file="../Common/LFO_1.cpp"/>
-      <FILE id="UEDHvF" name="LFO_1.h" compile="0" resource="0" file="../Common/LFO_1.h"/>
+      <FILE id="gFu0Bg" name="LFO_2.cpp" compile="1" resource="0" file="../Common/LFO_2.cpp"/>
+      <FILE id="xvoSQE" name="LFO_2.h" compile="0" resource="0" file="../Common/LFO_2.h"/>
       <FILE id="uP8nXN" name="ParameterListeners.h" compile="0" resource="0"
             file="../Common/ParameterListeners.h"/>
     </GROUP>
     <GROUP id="{EBC3D5DD-DB9B-D529-7541-59B54C874793}" name="Source">
-      <FILE id="g4iOGt" name="TremoloEditor.cpp" compile="1" resource="0"
-            file="Source/TremoloEditor.cpp"/>
-      <FILE id="EcKU91" name="TremoloEditor.h" compile="0" resource="0" file="Source/TremoloEditor.h"/>
-      <FILE id="BAUZMC" name="TremoloParameters.cpp" compile="1" resource="0"
-            file="Source/TremoloParameters.cpp"/>
-      <FILE id="xxjoG1" name="TremoloParameters.h" compile="0" resource="0"
-            file="Source/TremoloParameters.h"/>
-      <FILE id="jXdG2u" name="TremoloProcessor.cpp" compile="1" resource="0"
-            file="Source/TremoloProcessor.cpp"/>
-      <FILE id="fj7MFn" name="TremoloProcessor.h" compile="0" resource="0"
-            file="Source/TremoloProcessor.h"/>
+      <FILE id="g4iOGt" name="RingModEditor.cpp" compile="1" resource="0"
+            file="Source/RingModEditor.cpp"/>
+      <FILE id="EcKU91" name="RingModEditor.h" compile="0" resource="0" file="Source/RingModEditor.h"/>
+      <FILE id="BAUZMC" name="RingModParameters.cpp" compile="1" resource="0"
+            file="Source/RingModParameters.cpp"/>
+      <FILE id="xxjoG1" name="RingModParameters.h" compile="0" resource="0"
+            file="Source/RingModParameters.h"/>
+      <FILE id="jXdG2u" name="RingModProcessor.cpp" compile="1" resource="0"
+            file="Source/RingModProcessor.cpp"/>
+      <FILE id="fj7MFn" name="RingModProcessor.h" compile="0" resource="0"
+            file="Source/RingModProcessor.h"/>
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>

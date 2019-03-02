@@ -1,8 +1,8 @@
-#include "LFO.h"
+#include "LFO_1.h"
 #include <cmath>
 #define TWOPI_F 6.283185f
 
-void LFO::populateWaveformComboBox(ComboBox& cb)
+void LFO_1::populateWaveformComboBox(ComboBox& cb)
 {
     cb.clear(dontSendNotification);
     int itemNumber = 0;
@@ -12,9 +12,9 @@ void LFO::populateWaveformComboBox(ComboBox& cb)
     cb.addItem("Square (sloped edges)", ++itemNumber);
 }
 
-// Function for calculating LFO waveforms. Phase runs from 0-1, output is scaled
-// from 0 to 1 (note: not -1 to 1 as would be typical of sine).
-float LFO::getSample(float phase, Waveform waveform)
+// Function for calculating "biased" LFO waveforms with output range [0, 1].
+// Phase range [0, 1], output also [0, 1] (not [-1, +1] as for the ordinary Sine function).
+float LFO_1::getSample(float phase, Waveform waveform)
 {
     switch (waveform)
     {

@@ -1,79 +1,94 @@
-#include "TremoloProcessor.h"
-#include "TremoloEditor.h"
-#include "LFO_1.h"
+#include "RingModProcessor.h"
+#include "RingModEditor.h"
+#include "LFO_2.h"
 
 // Instantiate this plugin
 AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
-    return new TremoloProcessor();
+    return new RingModProcessor();
 }
 
 // Instantiate this plugin's editor/GUI
-AudioProcessorEditor* TremoloProcessor::createEditor()
+AudioProcessorEditor* RingModProcessor::createEditor()
 {
-    return new TremoloEditor(*this);
+    return new RingModEditor(*this);
 }
 
 // Constructor: start off assuming mono input, mono output
-TremoloProcessor::TremoloProcessor()
+RingModProcessor::RingModProcessor()
     : AudioProcessor(BusesProperties()
                      .withInput  ("Input",  AudioChannelSet::mono(), true)
                      .withOutput ("Output", AudioChannelSet::mono(), true)
                      )
-    , valueTreeState(*this, nullptr, Identifier(JucePlugin_Name), TremoloParameters::createParameterLayout())
+    , valueTreeState(*this, nullptr, Identifier(JucePlugin_Name), RingModParameters::createParameterLayout())
     , parameters(valueTreeState)
 {
 }
 
 // Destructor
-TremoloProcessor::~TremoloProcessor()
+RingModProcessor::~RingModProcessor()
 {
 }
 
 // Prepare to process audio (always called at least once before processBlock)
-void TremoloProcessor::prepareToPlay (double sampleRate, int /*maxSamplesPerBlock*/)
+void RingModProcessor::prepareToPlay (double sampleRate, int /*maxSamplesPerBlock*/)
 {
-    lfoPhase = 0.0;
+    carrierPhase = 0.0f;
+    lfoPhase = 0.0f;
     inverseSampleRate = 1.0 / sampleRate;
 }
 
 // Audio processing finished; release any allocated memory
-void TremoloProcessor::releaseResources()
+void RingModProcessor::releaseResources()
 {
 }
 
 // Process one buffer ("block") of data
-void TremoloProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer&)
+void RingModProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer&)
 {
     ScopedNoDenormals noDenormals;
 
-    // LFO phase starts at current LFO phase for each channel, advances by deltaPhi for each sample
-    float phi = lfoPhase;
-    float deltaPhi = float(parameters.lfoFreqHz * inverseSampleRate);
+    // local copies of state variables carrierPhase and lfoPhase
+    float cphi = carrierPhase;
+    float lphi = lfoPhase;
+    float dlphi = float(parameters.lfoFreqHz * inverseSampleRate);
 
     // apply the same modulation to all input channels for which there is an output channel
     int channelIndex = 0;
     for (; channelIndex < getTotalNumInputChannels(); channelIndex++)
     {
         // restart the phase sequence
-        phi = lfoPhase;
+        cphi = carrierPhase;
+        lphi = lfoPhase;
 
         const float* pIn = buffer.getReadPointer(channelIndex);
         float* pOut = buffer.getWritePointer(channelIndex);
 
         for (int i = 0; i < buffer.getNumSamples(); i++)
         {
-            float modAmount = LFO_1::getSample(phi, parameters.lfoWaveform);
-            *pOut++ = *pIn++ * (1.0f - parameters.modDepth * modAmount);
+            // Carrier oscillator is a simple sine wave
+            const float twoPi = 6.283185f;
+            float carrier = sin(twoPi * cphi);
+
+            // Ring modulation is just simple multiplication
+            *pOut++ = *pIn++ * carrier;
+
+            // Update carrier phase with FM, keeping in range [0, 1]
+            float lfo = LFO_2::getSample(lphi, parameters.lfoWaveform);
+            float deltaCarrierHz = parameters.lfoWidthHz * lfo;
+            float dcphi = float((parameters.carrierFreqHz + deltaCarrierHz) * inverseSampleRate);
+            cphi += dcphi;
+            while (cphi >= 1.0) cphi -= 1.0;
 
             // Update LFO phase, keeping in range [0, 1]
-            phi += deltaPhi;
-            while (phi >= 1.0) phi -= 1.0;
+            lphi += dlphi;
+            while (lphi >= 1.0) lphi -= 1.0;
         }
     }
 
-    // update the main LFO phase state variable, ready for the next processBlock() call
-    lfoPhase = phi;
+    // update the main phase state variables, ready for the next processBlock() call
+    carrierPhase = cphi;
+    lfoPhase = lphi;
 
     // clear any remaining/excess output channels to zero
     for (; channelIndex < getTotalNumOutputChannels(); channelIndex++)
@@ -83,14 +98,14 @@ void TremoloProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer&)
 }
 
 // Called by the host when it needs to persist the current plugin state
-void TremoloProcessor::getStateInformation (MemoryBlock& destData)
+void RingModProcessor::getStateInformation (MemoryBlock& destData)
 {
     std::unique_ptr<XmlElement> xml(valueTreeState.state.createXml());
     copyXmlToBinary(*xml, destData);
 }
 
 // Called by the host before processing, when it needs to restore a saved plugin state
-void TremoloProcessor::setStateInformation (const void* data, int sizeInBytes)
+void RingModProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     std::unique_ptr<XmlElement> xml(getXmlFromBinary(data, sizeInBytes));
     if (xml && xml->hasTagName(valueTreeState.state.getType()))

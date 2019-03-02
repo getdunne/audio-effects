@@ -1,14 +1,18 @@
 #pragma once
 #include "JuceHeader.h"
 
-struct LFO
+/*  LFO type 2: a simple symmetric-output (range [-1, 1]) LFO, used in the Ring Modulator effect.
+*/
+
+struct LFO_2
 {
     enum Waveform
     {
         kWaveformSine = 0,
         kWaveformTriangle,
         kWaveformSquare,
-        kWaveformSquareSlopedEdges,
+        kWaveformSawtooth,
+        kWaveformInverseSawtooth,
         kNumWaveforms
     };
 
