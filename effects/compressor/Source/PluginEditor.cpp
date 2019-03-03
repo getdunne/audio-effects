@@ -72,7 +72,7 @@ CompressorAudioProcessorEditor::CompressorAudioProcessorEditor (CompressorAudioP
     label->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
     addAndMakeVisible (sliderThreshold = new Slider (L"new slider"));
-    sliderThreshold->setRange (-60, 0, -60);
+    sliderThreshold->setRange (-60, 0, 0.5);
     sliderThreshold->setSliderStyle (Slider::RotaryVerticalDrag);
     sliderThreshold->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
     sliderThreshold->addListener (this);
