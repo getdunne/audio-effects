@@ -24,7 +24,7 @@ AudioProcessorValueTreeState::ParameterLayout CompressorParameters::createParame
 
     params.push_back(std::make_unique<AudioParameterFloat>(
         ratioID, ratioName,
-        NormalisableRange<float>(1.0f, 100.0f, 0.1f), 1.0f,
+        NormalisableRange<float>(1.0f, 20.0f, 0.1f), 1.0f,
         ratioLabel,
         AudioProcessorParameter::genericParameter,
         [](float value, int maxLength) { return String(value).substring(0, maxLength); },
@@ -32,7 +32,7 @@ AudioProcessorValueTreeState::ParameterLayout CompressorParameters::createParame
 
     params.push_back(std::make_unique<AudioParameterFloat>(
         attackID, attackName,
-        NormalisableRange<float>(0.1f, 80.0f, 0.1f), 0.1f,
+        NormalisableRange<float>(0.1f, 80.0f, 0.1f), 15.0f,
         attackLabel,
         AudioProcessorParameter::genericParameter,
         [](float value, int maxLength) { return String(value).substring(0, maxLength); },
@@ -40,7 +40,7 @@ AudioProcessorValueTreeState::ParameterLayout CompressorParameters::createParame
 
     params.push_back(std::make_unique<AudioParameterFloat>(
         releaseID, releaseName,
-        NormalisableRange<float>(0.1f, 1000.0f, 0.1f), 0.1f,
+        NormalisableRange<float>(1.0f, 1000.0f, 0.1f), 100.0f,
         releaseLabel,
         AudioProcessorParameter::genericParameter,
         [](float value, int maxLength) { return String(value).substring(0, maxLength); },
@@ -48,7 +48,7 @@ AudioProcessorValueTreeState::ParameterLayout CompressorParameters::createParame
 
     params.push_back(std::make_unique<AudioParameterFloat>(
         thresholdID, thresholdName,
-        NormalisableRange<float>(-60.0f, 0.0f, 0.5f), -60.0f,
+        NormalisableRange<float>(-60.0f, 0.0f, 0.5f), 0.0f,
         thresholdLabel,
         AudioProcessorParameter::genericParameter,
         [](float value, int maxLength) { return String(value).substring(0, maxLength); },
@@ -56,7 +56,7 @@ AudioProcessorValueTreeState::ParameterLayout CompressorParameters::createParame
 
     params.push_back(std::make_unique<AudioParameterFloat>(
         gainID, gainName,
-        NormalisableRange<float>(0.0f, 40.0f, 0.1f), 0.0f,
+        NormalisableRange<float>(0.0f, 24.0f, 0.1f), 0.0f,
         gainLabel,
         AudioProcessorParameter::genericParameter,
         [](float value, int maxLength) { return String(value).substring(0, maxLength); },

@@ -2,7 +2,7 @@
 #include "JuceHeader.h"
 #include "CompressorParameters.h"
 
-class CompressorProcessor : public AudioProcessor
+class CompressorProcessor : public AudioProcessor, public ChangeBroadcaster
 {
 public:
     CompressorProcessor();
@@ -32,6 +32,9 @@ public:
     // Enabling the host to save and restore state
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
+
+    // Computed linear gain (for GUI display)
+    float currentGain;
 
 protected:
     void calculateControlVoltage(AudioSampleBuffer &buffer, int m);

@@ -6,6 +6,8 @@
               pluginCode="gain" pluginManufacturerCode="DRMc" headerPath="../../../Common">
   <MAINGROUP id="XLUG4z" name="Compressor">
     <GROUP id="{793AEF3A-0BE5-37F1-F738-D60ED373C5A4}" name="Common">
+      <FILE id="NM72fl" name="BarGraph.cpp" compile="1" resource="0" file="../Common/BarGraph.cpp"/>
+      <FILE id="Y4NUBJ" name="BarGraph.h" compile="0" resource="0" file="../Common/BarGraph.h"/>
       <FILE id="HSyPE2" name="BasicKnob.cpp" compile="1" resource="0" file="../Common/BasicKnob.cpp"/>
       <FILE id="lDsiFs" name="BasicKnob.h" compile="0" resource="0" file="../Common/BasicKnob.h"/>
       <FILE id="GEyq80" name="DecibelKnob.cpp" compile="1" resource="0" file="../Common/DecibelKnob.cpp"/>

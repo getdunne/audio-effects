@@ -108,6 +108,8 @@ void CompressorProcessor::calculateControlVoltage(AudioSampleBuffer &buffer, int
     float alphaAttack = exp(-1.0f / (0.001f * samplerate * parameters.attackTimeMs));
     float alphaRelease = exp(-1.0f / (0.001f * samplerate * parameters.releaseTimeMs));
 
+    float yl_avg = 0.0f;
+
     for (int i = 0; i < bufferSize; ++i)
     {
         // Level detection- estimate level using peak detector
@@ -127,10 +129,17 @@ void CompressorProcessor::calculateControlVoltage(AudioSampleBuffer &buffer, int
         else
             y_l[i] = alphaRelease * yL_prev + (1 - alphaRelease) * x_l[i];
 
+        // Accumulate averaged gain for the whole buffer (for GUI display)
+        yl_avg += y_l[i];
+
         // find control
         c[i] = pow(10.0f, (parameters.makeUpGain - y_l[i]) / 20.0f);
         yL_prev = y_l[i];
     }
+
+    yl_avg /= bufferSize;
+    currentGain = pow(10.0f, -yl_avg / 20.0f);
+    sendChangeMessage();
 }
 
 // Called by the host when it needs to persist the current plugin state
