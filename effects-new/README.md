@@ -5,8 +5,6 @@ A second reason is more personal. I would like these projects to serve as workin
 
 My intent is not to disparage the work of the original authors in any way. All of these considerations were beyond the scope of the original development effort, and were not well provided for by the JUCE framework at the time. The situation is very different today. The JUCE framework has matured enormously, and now provides very good support for plug-in parameter management, but good code examples are exceedingly rare.
 
-It is my sincere hope that by taking the parameter-management bull by the horns, so to speak, I may be able to further Reiss and McPherson's pedagogic goals by equipping students to distinguish the genuinely unique parts of each code project from the surrounding JUCE boilerplate, and at the same time shed a bit of light on how that "boilerplate" ought to be written.
-
 ## Folder and project structure
 Each of the rewritten example projects is in a separate folder under this one. I have prepended a two-digit number to the folder names, so they naturally sort into an appropriate order for study--starting with the simplest and proceeding to the more complex.
 
