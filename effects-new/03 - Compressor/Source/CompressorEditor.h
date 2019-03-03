@@ -16,7 +16,7 @@ public:
     void resized() override;
 
     // ChangeListener
-    void changeListenerCallback(ChangeBroadcaster*);
+    void changeListenerCallback(ChangeBroadcaster*) override;
 
 private:
     SharedResourcePointer<BasicLookAndFeel> lookAndFeel;
