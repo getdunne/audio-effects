@@ -1,18 +1,17 @@
 #pragma once
 #include "JuceHeader.h"
-#include "ParametricEQParameters.h"
-#include "ParametricEQFilter.h"
+#include "WahWahParameters.h"
+#include "ResonantLowpassFilter.h"
 
-class ParametricEQProcessor : public AudioProcessor
-                            , public AudioProcessorValueTreeState::Listener
-                            , public ChangeBroadcaster
+class WahWahProcessor   : public AudioProcessor
+                        , public AudioProcessorValueTreeState::Listener
 {
 public:
-    ParametricEQProcessor();
-    ~ParametricEQProcessor();
+    WahWahProcessor();
+    ~WahWahProcessor();
 
     // How the plugin describes itself to the host
-    const String getName() const override { return "ParametricEQ"; }
+    const String getName() const override { return "WahWah"; }
     bool acceptsMidi() const override { return false; }
     bool producesMidi() const override { return false; }
     double getTailLengthSeconds() const override { return 0.0; }
@@ -37,27 +36,22 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
 public:
-    // bandwidth readout, declared public so it is visible to GUI editor
-    float bandwidthHz;
-
-public:
     // Plugin's AudioProcessorValueTreeState
     AudioProcessorValueTreeState valueTreeState;
 
     // Application's view of the AudioProcessorValueTreeState, including working parameter values
-    ParametricEQParameters parameters;
-
-    // Responding to parameter changes
-    void parameterChanged(const String&, float) override;
+    WahWahParameters parameters;
 
 protected:
+    // Responding to parameter changes
+    void parameterChanged(const String&, float) override { updateFilters(); }
 
     void updateFilters();
 
 private:
-    OwnedArray<ParametricEQFilter> filters;
+    OwnedArray<ResonantLowpassFilter> filters;
 
-    double sampleRateHz;
+    double inverseSampleRate; // Save the inverse of the sample rate for faster calculation
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ParametricEQProcessor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (WahWahProcessor)
 };

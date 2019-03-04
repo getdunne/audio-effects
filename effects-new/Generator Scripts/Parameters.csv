@@ -23,8 +23,8 @@ ParametricEQ,Centre Frequency,centreFreq,Centre Freq,,Hz,10,20000,1000,,centreFr
 ParametricEQ,Q,filterQ,Q,,,0.1,20,2,0.1,filterQ
 ParametricEQ,Gain,gain,Gain,,dB,-12,12,0,0.1,linearGain
 ,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
+WahWah,Centre Frequency,centreFreq,Centre Freq,,Hz,400,2000,400,,centreFreqHz
+WahWah,Q,filterQ,Q,,,2,20,5,0.1,filterQ
 ,,,,,,,,,,
 ,,,,,,,,,,
 ,,,,,,,,,,

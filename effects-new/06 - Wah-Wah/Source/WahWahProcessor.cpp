@@ -1,75 +1,70 @@
-#include "ParametricEQProcessor.h"
-#include "ParametricEQEditor.h"
+#include "WahWahProcessor.h"
+#include "WahWahEditor.h"
 
 // Instantiate this plugin
 AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
-    return new ParametricEQProcessor();
+    return new WahWahProcessor();
 }
 
 // Instantiate this plugin's editor/GUI
-AudioProcessorEditor* ParametricEQProcessor::createEditor()
+AudioProcessorEditor* WahWahProcessor::createEditor()
 {
-    return new ParametricEQEditor(*this);
+    return new WahWahEditor(*this);
 }
 
 // Constructor: start off assuming stereo input, stereo output
-ParametricEQProcessor::ParametricEQProcessor()
+WahWahProcessor::WahWahProcessor()
     : AudioProcessor(BusesProperties()
                      .withInput  ("Input",  AudioChannelSet::stereo(), true)
                      .withOutput ("Output", AudioChannelSet::stereo(), true)
                      )
-    , valueTreeState(*this, nullptr, Identifier("ParametricEQ"), ParametricEQParameters::createParameterLayout())
+    , valueTreeState(*this, nullptr, Identifier("WahWah"), WahWahParameters::createParameterLayout())
     , parameters(valueTreeState, this)
+    , inverseSampleRate(1.0 / 44100.0)  // sensible default
 {
 }
 
 // Destructor
-ParametricEQProcessor::~ParametricEQProcessor()
+WahWahProcessor::~WahWahProcessor()
 {
 }
 
-void ParametricEQProcessor::parameterChanged(const String&, float)
+void WahWahProcessor::updateFilters()
 {
-    // all parameters affect the filters
-    updateFilters();
-
-    // inform our GUI that the filter bandwidth may have changed
-    sendChangeMessage();
-}
-
-void ParametricEQProcessor::updateFilters()
-{
-#define TWOPI_D 6.283185307
+    // The filter will produce a resonant peak of amplitude Q; bring everything
+    // down somewhat to compensate, though try to maintain some perceptual balance
+    // of being similar loudness. (This factor has been chosen somewhat arbitrarily.)
+    const double kWahwahFilterGain = 0.5;
 
     for (auto& filter : filters)
     {
-        filter->makeParametric(TWOPI_D * parameters.centreFreqHz / sampleRateHz,
-                               parameters.filterQ, parameters.linearGain);
+        filter->makeResonantLowpass(inverseSampleRate, parameters.centreFreqHz, parameters.filterQ,
+                                    kWahwahFilterGain);
     }
 }
 
 // Prepare to process audio (always called at least once before processBlock)
-void ParametricEQProcessor::prepareToPlay (double sampleRate, int /*maxSamplesPerBlock*/)
+void WahWahProcessor::prepareToPlay (double sampleRate, int /*maxSamplesPerBlock*/)
 {
-    sampleRateHz = sampleRate;
+    inverseSampleRate = 1.0 / sampleRate;
 
     // create as many identical filters as there are input channels
     for (int i = 0; i < getTotalNumInputChannels(); i++)
-        filters.add(new ParametricEQFilter);
+        filters.add(new ResonantLowpassFilter);
 
     // Update the filter settings to work with the current parameters and sample rate
     updateFilters();
 }
 
 // Audio processing finished; release any allocated memory
-void ParametricEQProcessor::releaseResources()
+void WahWahProcessor::releaseResources()
 {
     filters.clear();
 }
 
 // Process one buffer ("block") of data
-void ParametricEQProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer&)
+void WahWahProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer&)
 {
     ScopedNoDenormals noDenormals;
 
@@ -96,14 +91,14 @@ void ParametricEQProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer
 }
 
 // Called by the host when it needs to persist the current plugin state
-void ParametricEQProcessor::getStateInformation (MemoryBlock& destData)
+void WahWahProcessor::getStateInformation (MemoryBlock& destData)
 {
     std::unique_ptr<XmlElement> xml(valueTreeState.state.createXml());
     copyXmlToBinary(*xml, destData);
 }
 
 // Called by the host before processing, when it needs to restore a saved plugin state
-void ParametricEQProcessor::setStateInformation (const void* data, int sizeInBytes)
+void WahWahProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     std::unique_ptr<XmlElement> xml(getXmlFromBinary(data, sizeInBytes));
     if (xml && xml->hasTagName(valueTreeState.state.getType()))

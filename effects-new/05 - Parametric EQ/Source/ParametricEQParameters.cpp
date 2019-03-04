@@ -47,6 +47,7 @@ ParametricEQParameters::ParametricEQParameters(AudioProcessorValueTreeState& vts
     , filterQ(2.0f)
     , linearGain(1.0f)
     , valueTreeState(vts)
+    , processorAsListener(processor)
     , centreFreqListener(centreFreqHz)
     , filterQListener(filterQ)
     , gainListener(linearGain)
@@ -56,9 +57,9 @@ ParametricEQParameters::ParametricEQParameters(AudioProcessorValueTreeState& vts
     valueTreeState.addParameterListener(gainID, &gainListener);
 
     // processor also needs to listen for parameter changes, in order to update filters
-    valueTreeState.addParameterListener(centreFreqID, processor);
-    valueTreeState.addParameterListener(filterQID, processor);
-    valueTreeState.addParameterListener(gainID, processor);
+    valueTreeState.addParameterListener(centreFreqID, processorAsListener);
+    valueTreeState.addParameterListener(filterQID, processorAsListener);
+    valueTreeState.addParameterListener(gainID, processorAsListener);
 }
 
 ParametricEQParameters::~ParametricEQParameters()
@@ -67,6 +68,9 @@ ParametricEQParameters::~ParametricEQParameters()
     valueTreeState.removeParameterListener(centreFreqID, &centreFreqListener);
     valueTreeState.removeParameterListener(filterQID, &filterQListener);
     valueTreeState.removeParameterListener(gainID, &gainListener);
+    valueTreeState.removeParameterListener(centreFreqID, processorAsListener);
+    valueTreeState.removeParameterListener(filterQID, processorAsListener);
+    valueTreeState.removeParameterListener(gainID, processorAsListener);
 }
 
 void ParametricEQParameters::detachControls()
