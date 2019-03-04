@@ -1,4 +1,6 @@
 # Reiss-McPherson Audio Effects examples
+**Note this is work-in-progress, NOT finished yet.**
+
 This repo contains updated and revised versions of [JUCE](https://juce.com/)-based audio effect plug-in code examples, originally published by Joshua D. Reiss and Andrew McPherson, to accompany their 2014 book [Audio Effects: Theory, Implementation and Application](https://www.crcpress.com/Audio-Effects-Theory-Implementation-and-Application/Reiss-McPherson/p/book/9781466560284).
 
 The original code was developed with a much earlier version of the [JUCE](https://juce.com/) software framework than is in use today, since which there have been some API-breaking changes. I am in the process of re-writing all the examples.
