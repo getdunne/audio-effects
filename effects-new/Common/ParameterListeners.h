@@ -41,7 +41,7 @@ struct FloatDecibelListener : public AudioProcessorValueTreeState::Listener
     float& workingValue;
     float minusInfinitydB;
 
-    FloatDecibelListener(float& wv, float minusInfDB)
+    FloatDecibelListener(float& wv, float minusInfDB=-100.0f)
         : AudioProcessorValueTreeState::Listener()
         , workingValue(wv)
         , minusInfinitydB(minusInfDB)

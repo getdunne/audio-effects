@@ -30,7 +30,7 @@ env.filters['makeFloat'] = makeFloat
 vars = {
     'author': 'Shane Dunne',
     'year': str(datetime.datetime.now().year),
-    'projectName': 'Distortion',
+    'projectName': 'ParametricEQ',
     'params': list(),
 }
 
