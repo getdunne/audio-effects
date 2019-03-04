@@ -4,7 +4,7 @@
 #include "LabeledKnob.h"
 #include "DecibelKnob.h"
 
-class DistortionEditor  : public AudioProcessorEditor, protected Timer
+class DistortionEditor  : public AudioProcessorEditor
 {
 public:
     DistortionEditor (DistortionProcessor&);
@@ -14,19 +14,14 @@ public:
     void paint (Graphics&) override;
     void resized() override;
 
-protected:
-    void timerCallback() override;
-
 private:
     SharedResourcePointer<BasicLookAndFeel> lookAndFeel;
     DistortionProcessor& processor;
 
-    GroupComponent undoGroup;
-    TextButton undoButton, redoButton;
+    GroupComponent mainGroup;
 
-    GroupComponent gainGroup;
-    DecibelKnob gainKnob;
-    LabeledKnob labeledGainKnob;
+    ComboBox distTypeCombo; Label distTypeLabel;
+    DecibelKnob gainKnob; LabeledKnob labeledGainKnob;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DistortionEditor)
 };

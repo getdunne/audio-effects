@@ -1,39 +1,34 @@
 #include "DistortionProcessor.h"
 #include "DistortionEditor.h"
+#include "Distortion.h"
 
 DistortionEditor::DistortionEditor (DistortionProcessor& p)
     : AudioProcessorEditor (&p)
     , processor (p)
-    , gainKnob(-100.0f, 12.0f)
-    , labeledGainKnob("Gain", gainKnob)
+    , gainKnob(-24.0f, 24.0f), labeledGainKnob("Gain", gainKnob)
 {
     setLookAndFeel(lookAndFeel);
 
-    undoGroup.setText("Undo Management");
-    addAndMakeVisible(&undoGroup);
+    mainGroup.setText("Distortion");
+    addAndMakeVisible(&mainGroup);
 
-    undoButton.setButtonText(TRANS("Undo"));
-    undoButton.onClick = [this]() { processor.undoManager.undo(); };
-    addAndMakeVisible(undoButton);
+    distTypeLabel.setText("Type", dontSendNotification);
+    distTypeLabel.setJustificationType(Justification::right);
+    addAndMakeVisible(&distTypeLabel);
 
-    redoButton.setButtonText(TRANS("Redo"));
-    redoButton.onClick = [this]() { processor.undoManager.redo(); };
-    addAndMakeVisible(redoButton);
-
-    gainGroup.setText("Gain Control");
-    addAndMakeVisible(&gainGroup);
+    distTypeCombo.setEditableText(false);
+    distTypeCombo.setJustificationType(Justification::centredLeft);
+    Distortion::populateDistortionTypeComboBox(distTypeCombo);
+    addAndMakeVisible(distTypeCombo);
 
     gainKnob.setDoubleClickReturnValue(true, 0.0, ModifierKeys::noModifiers);
     addAndMakeVisible(labeledGainKnob);
 
-    processor.parameters.attachControls(gainKnob);
-    processor.undoManager.clearUndoHistory();
+    processor.parameters.attachControls(
+        distTypeCombo,
+        gainKnob);
 
-    // For Undo: execute timer callback once immediately, then every 500ms thereafter
-    timerCallback();
-    startTimer(500);
-
-    setSize (300, 260);
+    setSize (60 + 100 * 2 + 10 * (2 - 1), 220);
 }
 
 DistortionEditor::~DistortionEditor()
@@ -46,37 +41,20 @@ void DistortionEditor::resized()
 {
     auto bounds = getLocalBounds().reduced(20);
 
-    auto undoArea = bounds.removeFromTop(80);
-    undoGroup.setBounds(undoArea);
-    auto undoButtonsArea = undoArea.reduced(20);
-    undoButtonsArea.removeFromTop(10);
-    auto buttonWidth = (undoButtonsArea.getWidth() - 20) / 2;
-    undoButton.setBounds(undoButtonsArea.removeFromLeft(buttonWidth));
-    redoButton.setBounds(undoButtonsArea.removeFromRight(buttonWidth));
+    mainGroup.setBounds(bounds);
+    auto widgetsArea = bounds.reduced(10);
 
-    bounds.removeFromTop(10);
-    gainGroup.setBounds(bounds);
-    auto gainArea = bounds.reduced(10);
-    gainArea.removeFromTop(10);
-    labeledGainKnob.setBounds(gainArea);
+    widgetsArea.removeFromTop(12);
+    auto waveformArea = widgetsArea.removeFromTop(24);
+    distTypeLabel.setBounds(waveformArea.removeFromLeft(40));
+    distTypeCombo.setBounds(waveformArea);
+    widgetsArea.removeFromTop(10);
+
+    labeledGainKnob.setBounds(widgetsArea);
 }
 
 void DistortionEditor::paint (Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll(lookAndFeel->findColour(ResizableWindow::backgroundColourId));
-}
-
-void DistortionEditor::timerCallback()
-{
-    // Doing this on a timed basis is copied from the JUCE ValueTreesDemo, but we don't want to start
-    // new transactions in the middle of an update gesture like dragging a slider, so we only do this
-    // when the mouse button is not down.
-
-    if (!isMouseButtonDownAnywhere())
-    {
-        processor.undoManager.beginNewTransaction();
-        undoButton.setEnabled(processor.undoManager.canUndo());
-        redoButton.setEnabled(processor.undoManager.canRedo());
-    }
 }

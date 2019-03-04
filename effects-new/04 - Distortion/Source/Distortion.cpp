@@ -11,26 +11,57 @@ void Distortion::populateDistortionTypeComboBox(ComboBox& cb)
     cb.addItem("Half-Wave Rectifier", ++itemNumber);
 }
 
-float Distortion::processSample(float inputSample, float linearGain, Type type)
+float Distortion::processSample(float sample, Type type)
 {
     switch (type)
     {
     case kHardClipping:
-        return linearGain * inputSample;
+    {
+        const float threshold = 0.5f;
+        if (sample > threshold) sample = threshold;         // positive clip
+        else if (sample < -threshold) sample = -threshold;  // negative clip
+    }
 
     case kSoftClipping:
-        return linearGain * inputSample;
+    {
+        const float threshold1 = 1.0f / 3.0f;
+        const float threshold2 = 2.0f / 3.0f;
+
+        if (sample > threshold1)
+        {
+            if (sample > threshold2) sample = 0.5f;         // positive clip
+            else // soft knee (positive)
+                sample = (3.0f - (2.0f - 3.0f * sample) * (2.0f - 3.0f * sample)) / 6.0f;
+        }
+        else if (sample < threshold1)
+        {
+            if (sample < -threshold2) sample = -0.5f;       // positive clip
+            else // soft knee (positive)
+                sample = -(3.0f - (2.0f + 3.0f * sample) * (2.0f + 3.0f * sample)) / 6.0f;
+        }
+    }
 
     case kSoftClippingExp:
-        return linearGain * inputSample;
+    {
+        if (sample > 0.0f)  // positive
+            sample = 1.0f - expf(-sample);
+        else                // negative
+            sample = -1.0f - expf(sample);
+    }
 
     case kFullWaveRectifier:
-        return linearGain * inputSample;
+    {
+        sample = fabs(sample);
+    }
 
     case kHalfWaveRectifier:
-        return linearGain * inputSample;
+    {
+        sample = 0.5f * (fabs(sample) + sample);
+    }
 
     default:
-        return linearGain * inputSample;
+        break;
     }
+
+    return sample;
 }

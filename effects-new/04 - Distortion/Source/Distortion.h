@@ -18,5 +18,5 @@ struct Distortion
 
     static void populateDistortionTypeComboBox(ComboBox& cb);
 
-    static float processSample(float inputSample, float linearGain, Type type);
+    static float processSample(float sample, Type type);
 };

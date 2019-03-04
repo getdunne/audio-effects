@@ -1,6 +1,6 @@
 #include "DistortionProcessor.h"
 #include "DistortionEditor.h"
-#include "DistortionType.h"
+#include "Distortion.h"
 
 // Instantiate this plugin
 AudioProcessor* JUCE_CALLTYPE createPluginFilter()
@@ -20,7 +20,7 @@ DistortionProcessor::DistortionProcessor()
                      .withInput  ("Input",  AudioChannelSet::stereo(), true)
                      .withOutput ("Output", AudioChannelSet::stereo(), true)
                      )
-    , valueTreeState(*this, &undoManager, Identifier(JucePlugin_Name), DistortionParameters::createParameterLayout())
+    , valueTreeState(*this, nullptr, Identifier("Distortion"), DistortionParameters::createParameterLayout())
     , parameters(valueTreeState)
 {
 }
@@ -45,20 +45,22 @@ void DistortionProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer&)
 {
     ScopedNoDenormals noDenormals;
 
-    // apply the same gain factor to all input channels for which there is an output channel
-    
-    for (int channelIndex = 0; channelIndex < getTotalNumInputChannels(); channelIndex++)
+    // apply the same distortion to all input channels for which there is an output channel
+    int channelIndex = 0;
+    for (; channelIndex < getTotalNumInputChannels(); channelIndex++)
     {
+        // Apply gain
+        buffer.applyGain(channelIndex, 0, buffer.getNumSamples(), parameters.linearGain);
+
         const float* pIn = buffer.getReadPointer(channelIndex);
         float* pOut = buffer.getWritePointer(channelIndex);
 
         for (int i = 0; i < buffer.getNumSamples(); i++)
         {
-            *pOut++ = *pIn++ * parameters.linearGain;
-            
-        
+            *pOut++ = Distortion::processSample(*pIn++, parameters.distType);
         }
     }
+
     // clear any remaining/excess output channels to zero
     for (; channelIndex < getTotalNumOutputChannels(); channelIndex++)
     {

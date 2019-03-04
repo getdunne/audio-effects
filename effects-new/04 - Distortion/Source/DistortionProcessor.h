@@ -9,7 +9,7 @@ public:
     ~DistortionProcessor();
 
     // How the plugin describes itself to the host
-    const String getName() const override { return JucePlugin_Name; }
+    const String getName() const override { return "Distortion"; }
     bool acceptsMidi() const override { return false; }
     bool producesMidi() const override { return false; }
     double getTailLengthSeconds() const override { return 0.0; }
@@ -34,9 +34,8 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
 public:
-    // Plugin's AudioProcessorValueTreeState, and its associated UndoManager
+    // Plugin's AudioProcessorValueTreeState
     AudioProcessorValueTreeState valueTreeState;
-    UndoManager undoManager;
 
     // Application's view of the AudioProcessorValueTreeState, including working parameter values
     DistortionParameters parameters;
