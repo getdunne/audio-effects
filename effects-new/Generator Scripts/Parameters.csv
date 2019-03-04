@@ -1,0 +1,28 @@
+Project,descriptive name,base name,label,enum count,unit,min,max,default,step,variable name
+BasicGain,Gain,gain,Gain,,dB,-100,12,0,,linearGain
+,,,,,,,,,,
+Tremolo,LFO Waveform,lfoWaveform,LFO,4,,,,,,lfoWaveform
+Tremolo,LFO Frequency,lfoFreq,LFO Freq,,Hz,0.1,10,1,,lfoFreqHz
+Tremolo,Modulation Depth,modDepth,Mod Depth,,%,0,100,50,,modDepth
+,,,,,,,,,,
+RingMod,Carrier Frequency,carrierFreq,Carrier Freq,,Hz,1,1000,,,carrierFreqHz
+RingMod,LFO Waveform,lfoWaveform,LFO Waveform,5,,,,,,lfoWaveform
+RingMod,LFO Frequency,lfoFreq,LFO Freq,,Hz,1,10,,,lfoFreqHz
+RingMod,LFO Sweep Width,lfoWidth,LFO Sweep Width,,Hz,0,100,,,lfoWidthHz
+,,,,,,,,,,
+Compressor,Compression Ratio,ratio,Ratio,,,1,20,1,,compressionRatio
+Compressor,Attack Time,attack,Attack Time,,ms,0.1,80,15,0.1,attackTimeMs
+Compressor,Release Time,release,Release Time,,ms,0.1,1000,100,0.1,releaseTimeMs
+Compressor,Threshold,threshold,Threshold,,dB,-60,0,0,0.5,threshold
+Compressor,Make-Up Gain,gain,Make-Up Gain,,dB,0,24,0,0.1,makeUpGain
+,,,,,,,,,,
+Distortion,Distortion Type,distType,Type,5,,,,,,distType
+Distortion,Gain,gain,Gain,,dB,-24,24,0,0.1,linearGain
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
