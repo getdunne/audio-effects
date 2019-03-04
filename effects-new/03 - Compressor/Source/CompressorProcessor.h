@@ -37,7 +37,7 @@ public:
     float currentGain;
 
 protected:
-    void calculateControlVoltage(AudioSampleBuffer &buffer, int m);
+    void computeCompressionGain(AudioSampleBuffer &buffer, int m);
 
 public:
     // Plugin's AudioProcessorValueTreeState, and its associated UndoManager

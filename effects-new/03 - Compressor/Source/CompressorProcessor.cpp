@@ -81,7 +81,7 @@ void CompressorProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer&)
             inputBuffer.addFrom(m, 0, buffer, m * 2 + 1, 0, bufferSize, 0.5f);
 
             // compression : calculates the control voltage
-            calculateControlVoltage(inputBuffer, m);
+            computeCompressionGain(inputBuffer, m);
 
             // apply control voltage to the audio signal
             const float *pIL = buffer.getReadPointer(2 * m + 0);
@@ -103,7 +103,7 @@ void CompressorProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer&)
     }
 }
 
-void CompressorProcessor::calculateControlVoltage(AudioSampleBuffer &buffer, int m)
+void CompressorProcessor::computeCompressionGain(AudioSampleBuffer &buffer, int m)
 {
     float alphaAttack = exp(-1.0f / (0.001f * samplerate * parameters.attackTimeMs));
     float alphaRelease = exp(-1.0f / (0.001f * samplerate * parameters.releaseTimeMs));
