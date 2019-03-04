@@ -1,7 +1,7 @@
 #include "{{ projectName }}Processor.h"
 #include "{{ projectName }}Editor.h"
 
-{{ projectName }}Editor::{{ projectName }}Editor (CompressorProcessor& p)
+{{ projectName }}Editor::{{ projectName }}Editor ({{ projectName }}Processor& p)
     : AudioProcessorEditor (&p)
     , processor (p)
     {% for p in params %}
@@ -17,13 +17,13 @@
 
     {% for p in params %}
     {% if p['enumCount'] > 0 %}
-    {{ p['baseName'] }}Label.setText({{ p['labelText'] }}, dontSendNotification);
+    {{ p['baseName'] }}Label.setText("{{ p['labelText'] }}", dontSendNotification);
     {{ p['baseName'] }}Label.setJustificationType(Justification::right);
-    addAndMakeVisible(&lfoWaveformLabel);
+    addAndMakeVisible(&{{ p['baseName'] }}Label);
     {{ p['baseName'] }}Combo.setEditableText(false);
     {{ p['baseName'] }}Combo.setJustificationType(Justification::centredLeft);
-    ENUMCLASS::populateWaveformComboBox({{ p['baseName'] }}Combo);
-    addAndMakeVisible(lfoWaveformCombo);
+    ENUMCLASS::populateComboBox({{ p['baseName'] }}Combo);
+    addAndMakeVisible({{ p['baseName'] }}Combo);
     {% else %}
     {{ p['baseName'] }}Knob.setDoubleClickReturnValue(true, {{ p['defaultValue']|makeDouble }}, ModifierKeys::noModifiers);
     addAndMakeVisible(labeled{{ p['baseName']|capitalizeFirstLetterOnly }}Knob);
@@ -41,17 +41,14 @@
         {% if params[-1]['enumCount'] > 0 %}
         {{ params[-1]['baseName'] }}Combo )
         {% else %}
-        {{ params[-1]['baseName'] }}Knob )
+        {{ params[-1]['baseName'] }}Knob );
         {% endif %}
-
-    processor.addChangeListener(this);
 
     setSize (60 + 100 * {{ params|count }} + 10 * ({{ params|count }} - 1), 180);
 }
 
 {{ projectName }}Editor::~{{ projectName }}Editor()
 {
-    processor.removeChangeListener(this);
     processor.parameters.detachControls();
     setLookAndFeel(nullptr);
 }

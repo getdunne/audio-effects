@@ -1,6 +1,6 @@
 #pragma once
 #include "JuceHeader.h"
-#include "CompressorProcessor.h"
+#include "{{ projectName }}Processor.h"
 #include "LabeledKnob.h"
 
 class {{ projectName }}Editor  : public AudioProcessorEditor

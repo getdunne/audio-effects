@@ -20,15 +20,15 @@ public:
     void attachControls(
         {% for p in params[:-1] %}
         {% if p['enumCount'] > 0 %}
-        {{ p['baseName'] }}Combo,
+        ComboBox& {{ p['baseName'] }}Combo,
         {% else %}
-        {{ p['baseName'] }}Knob,
+        Slider& {{ p['baseName'] }}Knob,
         {% endif %}
         {% endfor %}
         {% if params[-1]['enumCount'] > 0 %}
-        {{ params[-1]['baseName'] }}Combo )
+        ComboBox& {{ params[-1]['baseName'] }}Combo );
         {% else %}
-        {{ params[-1]['baseName'] }}Knob )
+        Slider& {{ params[-1]['baseName'] }}Knob );
         {% endif %}
 
     // working parameter values

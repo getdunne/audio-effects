@@ -19,7 +19,7 @@ AudioProcessorEditor* {{ projectName }}Processor::createEditor()
                      .withInput  ("Input",  AudioChannelSet::stereo(), true)
                      .withOutput ("Output", AudioChannelSet::stereo(), true)
                      )
-    , valueTreeState(*this, nullptr, Identifier("{{ projectName }}"), CompressorParameters::createParameterLayout())
+    , valueTreeState(*this, nullptr, Identifier("{{ projectName }}"), {{ projectName }}Parameters::createParameterLayout())
     , parameters(valueTreeState)
 {
 }
