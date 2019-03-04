@@ -35,7 +35,7 @@ private:
     std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> modDepthAttachment;
 
     // Listener objects link parameters to working variables
-    WaveformListener<LFO_1::Waveform> lfoWaveformListener;
+    EnumListener<LFO_1::Waveform> lfoWaveformListener;
     FloatListener lfoFreqListener;
     FloatListener modDepthListener;
 };

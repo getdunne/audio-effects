@@ -52,16 +52,16 @@ struct FloatDecibelListener : public AudioProcessorValueTreeState::Listener
     }
 };
 
-// This specialized AudioProcessorValueTreeState::Listener converts a 0-based integer to LFO::Waveform.
+// This specialized AudioProcessorValueTreeState::Listener converts a 0-based integer to an enum type.
 // Because we have multiple LFO classes with different Waveform enums, we use a templatized declaration.
-template <typename Waveform>
-struct WaveformListener : public AudioProcessorValueTreeState::Listener
+template <typename EnumType>
+struct EnumListener : public AudioProcessorValueTreeState::Listener
 {
-    Waveform& waveform;
+    EnumType& enumValue;
 
-    WaveformListener(Waveform& wf) : AudioProcessorValueTreeState::Listener(), waveform(wf) {}
+    EnumListener(EnumType& ev) : AudioProcessorValueTreeState::Listener(), enumValue(ev) {}
     void parameterChanged(const String&, float newValue) override
     {
-        waveform = (Waveform)(int(newValue + 0.5f));
+        enumValue = (EnumType)(int(newValue + 0.5f));
     }
 };

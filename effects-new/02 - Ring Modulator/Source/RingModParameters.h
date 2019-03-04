@@ -40,7 +40,7 @@ private:
 
     // Listener objects link parameters to working variables
     FloatListener carrierFreqListener;
-    WaveformListener<LFO_2::Waveform> lfoWaveformListener;
+    EnumListener<LFO_2::Waveform> lfoWaveformListener;
     FloatListener lfoFreqListener;
     FloatListener lfoWidthListener;
 };
