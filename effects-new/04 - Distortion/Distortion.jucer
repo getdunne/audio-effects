@@ -2,7 +2,7 @@
 
 <JUCERPROJECT id="Q6ptnT" name="Distortion" projectType="audioplug" jucerVersion="5.4.3"
               projectLineFeed="&#10;" companyName="Dunne-Reiss-McPherson" reportAppUsage="0"
-              displaySplashScreen="0" pluginFormats="buildAU,buildStandalone,buildVST3"
+              displaySplashScreen="0" pluginFormats="buildAU,buildStandalone,buildVST,buildVST3"
               pluginCode="dist" pluginManufacturerCode="DRMc" headerPath="../../../Common">
   <MAINGROUP id="XLUG4z" name="Distortion">
     <GROUP id="{793AEF3A-0BE5-37F1-F738-D60ED373C5A4}" name="Common">

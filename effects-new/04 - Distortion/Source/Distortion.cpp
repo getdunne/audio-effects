@@ -20,6 +20,7 @@ float Distortion::processSample(float sample, Type type)
         const float threshold = 0.5f;
         if (sample > threshold) sample = threshold;         // positive clip
         else if (sample < -threshold) sample = -threshold;  // negative clip
+        break;
     }
 
     case kSoftClipping:
@@ -33,12 +34,13 @@ float Distortion::processSample(float sample, Type type)
             else // soft knee (positive)
                 sample = (3.0f - (2.0f - 3.0f * sample) * (2.0f - 3.0f * sample)) / 6.0f;
         }
-        else if (sample < threshold1)
+        else if (sample < -threshold1)
         {
-            if (sample < -threshold2) sample = -0.5f;       // positive clip
-            else // soft knee (positive)
+            if (sample < -threshold2) sample = -0.5f;       // negative clip
+            else // soft knee (negative)
                 sample = -(3.0f - (2.0f + 3.0f * sample) * (2.0f + 3.0f * sample)) / 6.0f;
         }
+        break;
     }
 
     case kSoftClippingExp:
@@ -46,17 +48,20 @@ float Distortion::processSample(float sample, Type type)
         if (sample > 0.0f)  // positive
             sample = 1.0f - expf(-sample);
         else                // negative
-            sample = -1.0f - expf(sample);
+            sample = -1.0f + expf(sample);
+        break;
     }
 
     case kFullWaveRectifier:
     {
         sample = fabs(sample);
+        break;
     }
 
     case kHalfWaveRectifier:
     {
         sample = 0.5f * (fabs(sample) + sample);
+        break;
     }
 
     default:
