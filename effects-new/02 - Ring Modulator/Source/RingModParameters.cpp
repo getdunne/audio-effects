@@ -29,7 +29,7 @@ AudioProcessorValueTreeState::ParameterLayout RingModParameters::createParameter
 
     params.push_back(std::make_unique<AudioParameterInt>(
         lfoWaveformID, lfoWaveformName,
-        0, int(LFO_2::kNumWaveforms) - 1, int(LFO_2::kWaveformSine),
+        0, int(RingModLFO::kNumWaveforms) - 1, int(RingModLFO::kWaveformSine),
         lfoWaveformLabel,
         [](int value, int maxLength) { return String(value).substring(0, maxLength); },
         [](const String& text) { return text.getIntValue(); }));
@@ -55,7 +55,7 @@ AudioProcessorValueTreeState::ParameterLayout RingModParameters::createParameter
 
 RingModParameters::RingModParameters(AudioProcessorValueTreeState& vts)
     : carrierFreqHz(100.0f)
-    , lfoWaveform(LFO_2::kWaveformSine)
+    , lfoWaveform(RingModLFO::kWaveformSine)
     , lfoFreqHz(1.0f)
     , lfoWidthHz(0.0f)
     , valueTreeState(vts)

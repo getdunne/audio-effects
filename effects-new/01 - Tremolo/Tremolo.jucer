@@ -12,8 +12,6 @@
       <FILE id="fYvVWy" name="DecibelKnob.h" compile="0" resource="0" file="../Common/DecibelKnob.h"/>
       <FILE id="Rtbgty" name="LabeledKnob.cpp" compile="1" resource="0" file="../Common/LabeledKnob.cpp"/>
       <FILE id="IabbTH" name="LabeledKnob.h" compile="0" resource="0" file="../Common/LabeledKnob.h"/>
-      <FILE id="HO6yKV" name="LFO_1.cpp" compile="1" resource="0" file="../Common/LFO_1.cpp"/>
-      <FILE id="UEDHvF" name="LFO_1.h" compile="0" resource="0" file="../Common/LFO_1.h"/>
       <FILE id="uP8nXN" name="ParameterListeners.h" compile="0" resource="0"
             file="../Common/ParameterListeners.h"/>
     </GROUP>
@@ -21,6 +19,8 @@
       <FILE id="g4iOGt" name="TremoloEditor.cpp" compile="1" resource="0"
             file="Source/TremoloEditor.cpp"/>
       <FILE id="EcKU91" name="TremoloEditor.h" compile="0" resource="0" file="Source/TremoloEditor.h"/>
+      <FILE id="ItUDx9" name="TremoloLFO.cpp" compile="1" resource="0" file="Source/TremoloLFO.cpp"/>
+      <FILE id="h8YJXq" name="TremoloLFO.h" compile="0" resource="0" file="Source/TremoloLFO.h"/>
       <FILE id="BAUZMC" name="TremoloParameters.cpp" compile="1" resource="0"
             file="Source/TremoloParameters.cpp"/>
       <FILE id="xxjoG1" name="TremoloParameters.h" compile="0" resource="0"

@@ -1,8 +1,8 @@
-#include "LFO_2.h"
+#include "RingModLFO.h"
 #include <cmath>
 #define TWOPI_F 6.283185f
 
-void LFO_2::populateWaveformComboBox(ComboBox& cb)
+void RingModLFO::populateWaveformComboBox(ComboBox& cb)
 {
     cb.clear(dontSendNotification);
     int itemNumber = 0;
@@ -15,7 +15,7 @@ void LFO_2::populateWaveformComboBox(ComboBox& cb)
 
 // Function for calculating "unbiased" LFO waveforms with output range [-1, +1].
 // Phase range [0, 1], output [-1, +1] (no DC bias).
-float LFO_2::getSample(float phase, Waveform waveform)
+float RingModLFO::getSample(float phase, Waveform waveform)
 {
     switch (waveform)
     {

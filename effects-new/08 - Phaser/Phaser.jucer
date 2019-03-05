@@ -12,8 +12,6 @@
       <FILE id="fYvVWy" name="DecibelKnob.h" compile="0" resource="0" file="../Common/DecibelKnob.h"/>
       <FILE id="Rtbgty" name="LabeledKnob.cpp" compile="1" resource="0" file="../Common/LabeledKnob.cpp"/>
       <FILE id="IabbTH" name="LabeledKnob.h" compile="0" resource="0" file="../Common/LabeledKnob.h"/>
-      <FILE id="rHzSPR" name="LFO_2.cpp" compile="1" resource="0" file="../Common/LFO_2.cpp"/>
-      <FILE id="dVVonb" name="LFO_2.h" compile="0" resource="0" file="../Common/LFO_2.h"/>
       <FILE id="uP8nXN" name="ParameterListeners.h" compile="0" resource="0"
             file="../Common/ParameterListeners.h"/>
     </GROUP>
@@ -25,6 +23,8 @@
       <FILE id="Bg3Ins" name="PhaserEditor.cpp" compile="1" resource="0"
             file="Source/PhaserEditor.cpp"/>
       <FILE id="N6Bofy" name="PhaserEditor.h" compile="0" resource="0" file="Source/PhaserEditor.h"/>
+      <FILE id="QtrwXz" name="PhaserLFO.cpp" compile="1" resource="0" file="Source/PhaserLFO.cpp"/>
+      <FILE id="VkuETh" name="PhaserLFO.h" compile="0" resource="0" file="Source/PhaserLFO.h"/>
       <FILE id="yIm1nK" name="PhaserParameters.cpp" compile="1" resource="0"
             file="Source/PhaserParameters.cpp"/>
       <FILE id="dyflbm" name="PhaserParameters.h" compile="0" resource="0"

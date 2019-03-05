@@ -12,8 +12,6 @@
       <FILE id="fYvVWy" name="DecibelKnob.h" compile="0" resource="0" file="../Common/DecibelKnob.h"/>
       <FILE id="Rtbgty" name="LabeledKnob.cpp" compile="1" resource="0" file="../Common/LabeledKnob.cpp"/>
       <FILE id="IabbTH" name="LabeledKnob.h" compile="0" resource="0" file="../Common/LabeledKnob.h"/>
-      <FILE id="gFu0Bg" name="LFO_2.cpp" compile="1" resource="0" file="../Common/LFO_2.cpp"/>
-      <FILE id="xvoSQE" name="LFO_2.h" compile="0" resource="0" file="../Common/LFO_2.h"/>
       <FILE id="uP8nXN" name="ParameterListeners.h" compile="0" resource="0"
             file="../Common/ParameterListeners.h"/>
     </GROUP>
@@ -21,6 +19,8 @@
       <FILE id="g4iOGt" name="RingModEditor.cpp" compile="1" resource="0"
             file="Source/RingModEditor.cpp"/>
       <FILE id="EcKU91" name="RingModEditor.h" compile="0" resource="0" file="Source/RingModEditor.h"/>
+      <FILE id="gh4Oyu" name="RingModLFO.cpp" compile="1" resource="0" file="Source/RingModLFO.cpp"/>
+      <FILE id="ldo1FQ" name="RingModLFO.h" compile="0" resource="0" file="Source/RingModLFO.h"/>
       <FILE id="BAUZMC" name="RingModParameters.cpp" compile="1" resource="0"
             file="Source/RingModParameters.cpp"/>
       <FILE id="xxjoG1" name="RingModParameters.h" compile="0" resource="0"

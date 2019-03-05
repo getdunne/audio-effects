@@ -1,7 +1,7 @@
 #pragma once
 #include "JuceHeader.h"
 #include "ParameterListeners.h"
-#include "LFO_2.h"
+#include "RingModLFO.h"
 
 class RingModParameters
 {
@@ -24,7 +24,7 @@ public:
 
     // working parameter values
     float carrierFreqHz;
-    LFO_2::Waveform lfoWaveform;
+    RingModLFO::Waveform lfoWaveform;
     float lfoFreqHz;
     float lfoWidthHz;
 
@@ -40,7 +40,7 @@ private:
 
     // Listener objects link parameters to working variables
     FloatListener carrierFreqListener;
-    EnumListener<LFO_2::Waveform> lfoWaveformListener;
+    EnumListener<RingModLFO::Waveform> lfoWaveformListener;
     FloatListener lfoFreqListener;
     FloatListener lfoWidthListener;
 };

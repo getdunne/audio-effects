@@ -1,7 +1,7 @@
 #pragma once
 #include "JuceHeader.h"
 #include "ParameterListeners.h"
-#include "LFO_2.h"
+#include "PhaserLFO.h"
 
 class PhaserParameters
 {
@@ -49,7 +49,7 @@ public:
     float feedback;
     float lfoFreqHz;
     bool stereoMode;
-    LFO_2::Waveform lfoWaveform;
+    PhaserLFO::Waveform lfoWaveform;
     int numFilters;
 
 private:
@@ -76,6 +76,6 @@ private:
     FloatListener feedbackListener;
     FloatListener lfoFreqListener;
     BoolListener stereoListener;
-    EnumListener<LFO_2::Waveform> lfoWaveformListener;
+    EnumListener<PhaserLFO::Waveform> lfoWaveformListener;
     IntegerListener numFiltersListener;
 };

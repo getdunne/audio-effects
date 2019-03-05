@@ -1,6 +1,6 @@
 #include "RingModProcessor.h"
 #include "RingModEditor.h"
-#include "LFO_2.h"
+#include "RingModLFO.h"
 
 // Instantiate this plugin
 AudioProcessor* JUCE_CALLTYPE createPluginFilter()
@@ -74,7 +74,7 @@ void RingModProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer&)
             *pOut++ = *pIn++ * carrier;
 
             // Update carrier phase with FM, keeping in range [0, 1]
-            float lfo = LFO_2::getSample(lphi, parameters.lfoWaveform);
+            float lfo = RingModLFO::getSample(lphi, parameters.lfoWaveform);
             float deltaCarrierHz = parameters.lfoWidthHz * lfo;
             float dcphi = float((parameters.carrierFreqHz + deltaCarrierHz) * inverseSampleRate);
             cphi += dcphi;

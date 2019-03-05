@@ -1,10 +1,10 @@
 #pragma once
 #include "JuceHeader.h"
 
-/*  LFO type 2: a simple symmetric-output (range [-1, 1]) LFO, used in the Ring Modulator effect.
+/*  A simple biased-output (range [0, 1]) LFO, used in the Phaser effect.
 */
 
-struct LFO_2
+struct PhaserLFO
 {
     enum Waveform
     {
@@ -12,7 +12,6 @@ struct LFO_2
         kWaveformTriangle,
         kWaveformSquare,
         kWaveformSawtooth,
-        kWaveformInverseSawtooth,
         kNumWaveforms
     };
 

@@ -1,6 +1,6 @@
 #include "RingModProcessor.h"
 #include "RingModEditor.h"
-#include "LFO_2.h"
+#include "RingModLFO.h"
 
 RingModEditor::RingModEditor(RingModProcessor& p)
     : AudioProcessorEditor(&p)
@@ -29,7 +29,7 @@ RingModEditor::RingModEditor(RingModProcessor& p)
 
     lfoWaveformCombo.setEditableText(false);
     lfoWaveformCombo.setJustificationType(Justification::centredLeft);
-    LFO_2::populateWaveformComboBox(lfoWaveformCombo);
+    RingModLFO::populateWaveformComboBox(lfoWaveformCombo);
     addAndMakeVisible(lfoWaveformCombo);
 
     lfoFreqKnob.setDoubleClickReturnValue(true, 1.0f, ModifierKeys::noModifiers);

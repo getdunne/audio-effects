@@ -1,7 +1,7 @@
 #pragma once
 #include "JuceHeader.h"
 #include "ParameterListeners.h"
-#include "LFO_1.h"
+#include "TremoloLFO.h"
 
 class TremoloParameters
 {
@@ -21,7 +21,7 @@ public:
     void attachControls(ComboBox& lfoWaveformCombo, Slider& lfoFreqKnob, Slider& modDepthKnob);
 
     // working parameter values
-    LFO_1::Waveform lfoWaveform;
+    TremoloLFO::Waveform lfoWaveform;
     float lfoFreqHz;
     float modDepth;
 
@@ -35,7 +35,7 @@ private:
     std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> modDepthAttachment;
 
     // Listener objects link parameters to working variables
-    EnumListener<LFO_1::Waveform> lfoWaveformListener;
+    EnumListener<TremoloLFO::Waveform> lfoWaveformListener;
     FloatListener lfoFreqListener;
     FloatListener modDepthListener;
 };

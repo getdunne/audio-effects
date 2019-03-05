@@ -50,7 +50,7 @@ const int PhaserParameters::stereoDefault = 0;
 const String PhaserParameters::lfoWaveformID = "lfoWaveform";
 const String PhaserParameters::lfoWaveformName = TRANS("LFO");
 const String PhaserParameters::lfoWaveformLabel = "";
-const int PhaserParameters::lfoWaveformEnumCount = 5;
+const int PhaserParameters::lfoWaveformEnumCount = 4;
 const int PhaserParameters::lfoWaveformDefault = 0;
 // Number of Filters
 const String PhaserParameters::numFiltersID = "numFilters";
@@ -128,7 +128,7 @@ PhaserParameters::PhaserParameters(AudioProcessorValueTreeState& vts,
     , feedback(feedbackDefault)
     , lfoFreqHz(lfoFreqDefault)
     , stereoMode(stereoDefault)
-    , lfoWaveform((LFO_2::Waveform)lfoWaveformDefault)
+    , lfoWaveform((PhaserLFO::Waveform)lfoWaveformDefault)
     , numFilters(numFiltersDefault)
     , valueTreeState(vts)
     , processorAsListener(processor)

@@ -1,10 +1,10 @@
 #pragma once
 #include "JuceHeader.h"
 
-/*  LFO type 1: a simple biased-output (range [0, 1]) LFO, used in the Tremolo effect.
+/*  A simple biased-output (range [0, 1]) LFO, used in the Tremolo effect.
 */
 
-struct LFO_1
+struct TremoloLFO
 {
     enum Waveform
     {

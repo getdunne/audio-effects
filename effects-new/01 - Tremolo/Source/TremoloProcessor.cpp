@@ -1,6 +1,6 @@
 #include "TremoloProcessor.h"
 #include "TremoloEditor.h"
-#include "LFO_1.h"
+#include "TremoloLFO.h"
 
 // Instantiate this plugin
 AudioProcessor* JUCE_CALLTYPE createPluginFilter()
@@ -63,7 +63,7 @@ void TremoloProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer&)
 
         for (int i = 0; i < buffer.getNumSamples(); i++)
         {
-            float modAmount = LFO_1::getSample(phi, parameters.lfoWaveform);
+            float modAmount = TremoloLFO::getSample(phi, parameters.lfoWaveform);
             *pOut++ = *pIn++ * (1.0f - parameters.modDepth * modAmount);
 
             // Update LFO phase, keeping in range [0, 1]

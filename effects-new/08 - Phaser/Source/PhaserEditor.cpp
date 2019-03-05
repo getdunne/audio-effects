@@ -37,7 +37,7 @@ PhaserEditor::PhaserEditor (PhaserProcessor& p)
     addAndMakeVisible(&lfoWaveformLabel);
     lfoWaveformCombo.setEditableText(false);
     lfoWaveformCombo.setJustificationType(Justification::centredLeft);
-    LFO_2::populateWaveformComboBox(lfoWaveformCombo);
+    PhaserLFO::populateWaveformComboBox(lfoWaveformCombo);
     addAndMakeVisible(lfoWaveformCombo);
     numFiltersLabel.setText("Number of Filters", dontSendNotification);
     numFiltersLabel.setJustificationType(Justification::right);
