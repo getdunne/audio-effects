@@ -147,7 +147,7 @@ void PhaserProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer&)
                 // the LFO moves slowly, the difference won't generally be audible.
                 if (sc % filterUpdateInterval == 0)
                 {
-                    float lfoSample = 0.5f * (1.0f + PhaserLFO::getSample(ph, parameters.lfoWaveform));
+                    float lfoSample = PhaserLFO::getSample(ph, parameters.lfoWaveform);
                     double centreFrequency = parameters.baseFreqHz + parameters.sweepWidthHz * lfoSample;
                     filter->makeAllpass(inverseSampleRate, centreFrequency);
                 }
