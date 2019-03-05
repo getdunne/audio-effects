@@ -42,3 +42,8 @@ Phaser,LFO Frequency,lfoFreq,LFO Freq,,Hz,0.05,2,0.5,0.05,lfoFreqHz
 Phaser,Stereo,stereo,Stereo,2,,,,0,,stereoMode
 Phaser,LFO Waveform,lfoWaveform,LFO,4,,,,0,,lfoWaveform
 Phaser,Number of Filters,numFilters,Number of Filters,5,,,,1,,numFilters
+,,,,,,,,,,
+Delay,Delay Time,delayTime,Delay Time,,sec,0.01,2,0.5,0.01,delaySec
+Delay,Feedback,feedback,Feedback,,%,0,99.5,75,0.5,feedback
+Delay,Dry Mix Level,dryLevel,Dry Mix Level,,%,0,100,100,1,dryLevel
+Delay,Wet Mix Level,wetLevel,Delay Mix Level,,%,0,100,50,1,wetLevel

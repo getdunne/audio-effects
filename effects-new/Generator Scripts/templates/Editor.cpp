@@ -6,8 +6,8 @@
     , processor (p)
     {% for p in params %}
     {% if p['enumCount'] == 0 %}
-    , {{ p['baseName'] }}Knob({{ projectName }}Parameters::{{ p['baseName'] }}Min, {{ projectName }}Parameters::{{ p['baseName'] }}Max, "{{ p['unitOfMeasure'] }}")
-    , labeled{{ p['baseName']|capitalizeFirstLetterOnly }}Knob("{{ p['labelText'] }}", {{ p['baseName'] }}Knob)
+    , {{ p['baseName'] }}Knob({{ projectName }}Parameters::{{ p['baseName'] }}Min, {{ projectName }}Parameters::{{ p['baseName'] }}Max, {{ projectName }}Parameters::{{ p['baseName'] }}Label)
+    , labeled{{ p['baseName']|capitalizeFirstLetterOnly }}Knob({{ projectName }}Parameters::{{ p['baseName'] }}Name, {{ p['baseName'] }}Knob)
     {% endif %}
     {% endfor %}
 {
