@@ -4,7 +4,7 @@
 WahWahEditor::WahWahEditor (WahWahProcessor& p)
     : AudioProcessorEditor (&p)
     , processor (p)
-    , centreFreqKnob(400.0f, 2000.0f), labeledCentreFreqKnob("Centre Freq", centreFreqKnob)
+    , centreFreqKnob(400.0f, 2000.0f, "Hz"), labeledCentreFreqKnob("Centre Freq", centreFreqKnob)
     , filterQKnob(2.0f, 20.0f), labeledFilterQKnob("Q", filterQKnob)
 {
     setLookAndFeel(lookAndFeel);

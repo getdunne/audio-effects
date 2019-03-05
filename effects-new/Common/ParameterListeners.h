@@ -15,11 +15,13 @@ struct BoolListener : public AudioProcessorValueTreeState::Listener
 struct IntegerListener : public AudioProcessorValueTreeState::Listener
 {
     int& workingValue;
+    int offset, multiplier;
 
-    IntegerListener(int& wv) : AudioProcessorValueTreeState::Listener(), workingValue(wv) {}
+    IntegerListener(int& wv, int ofs=0, int mp=1)
+        : AudioProcessorValueTreeState::Listener(), workingValue(wv), offset(ofs), multiplier(mp) {}
     void parameterChanged(const String&, float newValue) override
     {
-        workingValue = (int)newValue;
+        workingValue = int(newValue) * multiplier + offset;
     }
 };
 

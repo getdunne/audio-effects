@@ -1,11 +1,19 @@
 #include "{{ projectName }}Parameters.h"
 
-// Names are symbolic names used to tag AudioParameter objects and XML attributes
-// Labels are human-friendly identifiers for use in GUIs
 {% for p in params %}
+// {{ p['descriptiveName'] }}
 const String {{ projectName }}Parameters::{{ p['baseName'] }}ID = "{{ p['baseName'] }}";
 const String {{ projectName }}Parameters::{{ p['baseName'] }}Name = TRANS("{{ p['labelText'] }}");
 const String {{ projectName }}Parameters::{{ p['baseName'] }}Label = "{{ p['unitOfMeasure'] }}";
+{% if p['enumCount'] > 0 %}
+const int {{ projectName }}Parameters::{{ p['baseName'] }}EnumCount = {{ p['enumCount'] }};
+const int {{ projectName }}Parameters::{{ p['baseName'] }}Default = {{ p['defaultValue'] }};
+{% else %}
+const float {{ projectName }}Parameters::{{ p['baseName'] }}Min = {{ p['minValue']|makeFloat }};
+const float {{ projectName }}Parameters::{{ p['baseName'] }}Max = {{ p['maxValue']|makeFloat }};
+const float {{ projectName }}Parameters::{{ p['baseName'] }}Default = {{ p['defaultValue']|makeFloat }};
+const float {{ projectName }}Parameters::{{ p['baseName'] }}Step = {{ p['stepValue']|makeFloat }};
+{% endif %}
 {% endfor %}
 
 AudioProcessorValueTreeState::ParameterLayout {{ projectName }}Parameters::createParameterLayout()
@@ -16,14 +24,14 @@ AudioProcessorValueTreeState::ParameterLayout {{ projectName }}Parameters::creat
     {% if p['enumCount'] > 0 %}
     params.push_back(std::make_unique<AudioParameterInt>(
         {{ p['baseName'] }}ID, {{ p['baseName'] }}Name,
-        0, {{ p['enumCount'] }} - 1, 0,
+        0, {{ p['baseName'] }}EnumCount - 1, {{ p['baseName'] }}Default,
         {{ p['baseName'] }}Label,
         [](int value, int maxLength) { return String(value).substring(0, maxLength); },
         [](const String& text) { return text.getIntValue(); }));
     {% else %}
     params.push_back(std::make_unique<AudioParameterFloat>(
         {{ p['baseName'] }}ID, {{ p['baseName'] }}Name,
-        NormalisableRange<float>({{ p['minValue']|makeFloat }}, {{ p['maxValue']|makeFloat }}, {{ p['stepValue']|makeFloat }}), {{ p['defaultValue']|makeFloat }},
+        NormalisableRange<float>({{ p['baseName'] }}Min, {{ p['baseName'] }}Max, {{ p['baseName'] }}Step), {{ p['baseName'] }}Default,
         {{ p['baseName'] }}Label,
         AudioProcessorParameter::genericParameter,
         [](float value, int maxLength) { return String(value).substring(0, maxLength); },
@@ -35,9 +43,9 @@ AudioProcessorValueTreeState::ParameterLayout {{ projectName }}Parameters::creat
 }
 
 {{ projectName }}Parameters::{{ projectName }}Parameters(AudioProcessorValueTreeState& vts)
-    : {{ params[0]['workingVar'] }}({{ params[0]['defaultValue']|makeFloat }})
+    : {{ params[0]['workingVar'] }}({{ params[0]['baseName'] }}Default)
     {% for p in params[1:] %}
-    , {{ p['workingVar'] }}({{ p['defaultValue']|makeFloat }})
+    , {{ p['workingVar'] }}({{ p['baseName'] }}Default)
     {% endfor %}
     , valueTreeState(vts)
     {% for p in params %}
