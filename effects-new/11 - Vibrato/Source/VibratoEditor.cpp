@@ -1,6 +1,7 @@
 
 #include "VibratoProcessor.h"
 #include "VibratoEditor.h"
+#include "Vibrato.h"
 #include "LFO_2.h"
 
 
@@ -8,8 +9,8 @@ VibratoEditor::VibratoEditor (VibratoProcessor& p)
     : AudioProcessorEditor (&p)
     , processor (p)
     , lfoFreqKnob(0.1f, 20.0f, "Hz")
-    , labeledLfoFreqKnob("LFO Freq", lfoFreqKnob)
     , sweepWidthKnob(0.0f, 1.0f, "%")
+    , labeledLfoFreqKnob("LFO Freq", lfoFreqKnob)
     , labeledSweepWidthKnob("Width", sweepWidthKnob)
 
 {
@@ -36,7 +37,7 @@ VibratoEditor::VibratoEditor (VibratoProcessor& p)
     
     interpolationCombo.setEditableText(false);
     interpolationCombo.setJustificationType(Justification::centredLeft);
-//    LFO_2::populateWaveformComboBox(lfoWaveformCombo);
+    Vibrato::populateInterpolationComboBox(interpolationCombo);
     addAndMakeVisible(interpolationCombo);
     
     lfoFreqKnob.setDoubleClickReturnValue(true, 1.0f, ModifierKeys::noModifiers);
@@ -47,38 +48,9 @@ VibratoEditor::VibratoEditor (VibratoProcessor& p)
     
     processor.parameters.attachControls(lfoWaveformCombo, interpolationCombo, lfoFreqKnob, sweepWidthKnob);
     
-    setSize (450, 250);
+    setSize (450, 325);
     
     
-    
-//    
-//    frequencySlider.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
-//    frequencySlider.setRange(0.5, 5.0, 0.025);
-//    frequencySlider.setTextBoxStyle(Slider::TextBoxBelow, true, 25, 15);
-//    frequencyAttachment.reset (new AudioProcessorValueTreeState::SliderAttachment (valueTreeState, "frequency", frequencySlider));
-//    
-//    sweepWidthSlider.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
-//    sweepWidthSlider.setRange (.001, VibratoProcessor::kMaximumSweepWidth, 0.0005);
-//    sweepWidthSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 25, 15);
-//    sweepWidthAttachment.reset (new AudioProcessorValueTreeState::SliderAttachment (valueTreeState, "sweepWidth", sweepWidthSlider));
-//    
-//    interpolationMenu.addItem("kInterpolationNearestNeighbour", kInterpolationNearestNeighbour);
-//    interpolationMenu.addItem("kInterpolationLinear", kInterpolationLinear);
-//    interpolationMenu.addItem("kInterpolationCubic", kInterpolationCubic);
-//    interpolationAttachment.reset (new AudioProcessorValueTreeState::ComboBoxAttachment (valueTreeState, "interpolation", interpolationMenu));
-//    
-//    waveformMenu.addItem("kWaveformSine"  , kWaveformSine);
-//    waveformMenu.addItem("kWaveformTriangle"  , kWaveformTriangle);
-//    waveformMenu.addItem("kWaveformSquare"  , kWaveformSquare);
-//    waveformMenu.addItem("kWaveformSawtooth"  , kWaveformSawtooth);
-//    waveformMenu.addItem("kWaveformInverseSawtooth"  ,  kWaveformInverseSawtooth);
-//    waveformAttachment.reset (new AudioProcessorValueTreeState::ComboBoxAttachment (valueTreeState, "waveform", waveformMenu));
-//    
-//    addAndMakeVisible (sweepWidthSlider);
-//    addAndMakeVisible (frequencySlider);
-//    addAndMakeVisible (waveformMenu);
-//    addAndMakeVisible (interpolationMenu);
-//    
     
 }
 
@@ -161,7 +133,10 @@ void VibratoEditor::resized()
     widgetsArea.removeFromTop(12);
     auto waveformArea = widgetsArea.removeFromTop(24);
     lfoWaveformLabel.setBounds(waveformArea.removeFromLeft(40));
-    lfoWaveformCombo.setBounds(waveformArea);
+    lfoWaveformCombo.setBounds(waveformArea.removeFromLeft(getWidth()/2));
+    auto interpolationArea = widgetsArea.removeFromTop(48);
+    interpolationLabel.setBounds(interpolationArea.removeFromLeft(40));
+    interpolationCombo.setBounds(interpolationArea.removeFromLeft(getWidth()/2));
     widgetsArea.removeFromTop(10);
     
     int knobWidth = widgetsArea.getWidth() / 2 - 10;

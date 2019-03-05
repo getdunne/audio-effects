@@ -67,7 +67,7 @@ VibratoParameters::VibratoParameters(AudioProcessorValueTreeState& vts)
     , interpolationListener(interpolation)
     , lfoWaveformListener(lfoWaveform)
     , lfoFreqListener(lfoFreqHz)
-    , sweepWidthListener(sweepWidth, 0.01f)
+    , sweepWidthListener(sweepWidth)
 
 
 {

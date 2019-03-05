@@ -16,5 +16,5 @@ struct Vibrato
     
     static void populateInterpolationComboBox(ComboBox& cb);
     
-    static float processSample(float sample, Type type);
+    static float processSample(float sample, Type type, float delayReadPosition, float* delayData, int delayBufferLength, float interpolatedSample);
 };

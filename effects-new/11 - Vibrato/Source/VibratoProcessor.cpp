@@ -40,16 +40,9 @@ VibratoProcessor::VibratoProcessor()
     , valueTreeState(*this, nullptr, Identifier(JucePlugin_Name), VibratoParameters::createParameterLayout())
     , parameters(valueTreeState)
 {
-//    frequencyParameter = parameters.getRawParameterValue ("frequency");
-//    sweepWidthParameter  = parameters.getRawParameterValue ("sweepWidth");
-//    interpolationParameter  = parameters.getRawParameterValue ("interpolation");
-//    waveformParameter  = parameters.getRawParameterValue ("waveform");
+
 //    delayBufferLength_ = 1;
-//    lfoPhase_ = 0.0;
-//    inverseSampleRate_ = 1.0/44100.0;
-//
-//    // Start the circular buffer pointer at the beginning
-//    delayWritePosition_ = 0;
+
 }
 
 
@@ -67,10 +60,12 @@ void VibratoProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
     // initialisation that you need..
     // Allocate and zero the delay buffer (size will depend on current sample rate)
     // Add 3 extra samples to allow cubic interpolation even at maximum delay
+    delayWritePosition_ = 0;
     delayBufferLength_ = (int)(kMaximumSweepWidth*sampleRate) + 3;
     delayBuffer_.setSize(2, delayBufferLength_);
     delayBuffer_.clear();
     lfoPhase_ = 0.0;
+    inverseSampleRate_ = 1.0/sampleRate;
 }
 
 void VibratoProcessor::releaseResources()
@@ -80,40 +75,25 @@ void VibratoProcessor::releaseResources()
 
 
 
-void VibratoProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
+void VibratoProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& )
 {
     ScopedNoDenormals noDenormals;
-    auto totalNumInputChannels  = getTotalNumInputChannels();
-    auto totalNumOutputChannels = getTotalNumOutputChannels();
-    auto numSamples = buffer.getNumSamples();
-   
-    
-    int channel, dpw; // dpr = delay read pointer; dpw = delay write pointer
-    float dpr, currentDelay, ph;
-    
-    // Go through each channel of audio that's passed in. In this example we apply identical
-    // effects to each channel, regardless of how many input channels there are. For some effects, like
-    // a stereo chorus or panner, you might do something different for each channel.
-    
-    
-    
-    
-    
-    for (channel = 0; channel < totalNumInputChannels; ++channel)
-    {
-        auto* channelData = buffer.getWritePointer (channel);
 
-        float* delayData = delayBuffer_.getWritePointer (jmin (channel, delayBuffer_.getNumChannels() - 1));
+     // apply the same vibrato to all input channels for which there is an output channel
+    int dpw;
+    float ph;
+    
+    int channelIndex = 0;
+    for (; channelIndex < getTotalNumInputChannels(); channelIndex++)
+    {
+        auto* channelData = buffer.getWritePointer (channelIndex);
+        float* delayData = delayBuffer_.getWritePointer (jmin (channelIndex, delayBuffer_.getNumChannels() - 1));
         
-        // Make a temporary copy of any state variables declared in PluginProcessor.h which need to be
-        // maintained between calls to processBlock(). Each channel needs to be processed identically
-        // which means that the activity of processing one channel can't affect the state variable for
-        // the next channel.
         
         dpw = delayWritePosition_;
         ph = lfoPhase_;
         
-        for (int i = 0; i < numSamples; ++i)
+        for (int i = 0; i < buffer.getNumSamples(); i++)
         {
             const float in = channelData[i];
             float interpolatedSample = 0.0;
@@ -122,20 +102,15 @@ void VibratoProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& mid
             // implementation might increment the read pointer based on the derivative of the LFO without
             // running the whole equation again, but this format makes the operation clearer.
             
-            currentDelay = parameters.sweepWidth*lfo(ph, parameters.lfoWaveform);
+            float currentDelay = parameters.sweepWidth*LFO_2::getSample(ph, parameters.lfoWaveform);
             
             // Subtract 3 samples to the delay pointer to make sure we have enough previously written
             // samples to interpolate with
-            dpr = fmodf((float)dpw - (float)(currentDelay * getSampleRate()) + (float)delayBufferLength_ - 3.0,
+            float dpr = fmodf((float)dpw - (float)(currentDelay * getSampleRate()) + (float)delayBufferLength_ - 3.0,
                         (float)delayBufferLength_);
             
-            // In this example, the output is the input plus the contents of the delay buffer (weighted by delayMix)
-            // The last term implements a tremolo (variable amplitude) on the whole thing.
-            
-            
-            
-            Vibrato::processSample(in, parameters.interpolation);
-            
+
+            Vibrato::processSample(in, parameters.interpolation, dpr, delayData, delayBufferLength_, interpolatedSample );
             
             
             // Store the current information in the delay buffer. With feedback, what we read is
@@ -160,19 +135,17 @@ void VibratoProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& mid
                 ph -= 1.0;
         }
     }
-    
+
     // Having made a local copy of the state variables for each channel, now transfer the result
     // back to the main state variable so they will be preserved for the next call of processBlock()
-    
     
     delayWritePosition_ = dpw;
     lfoPhase_ = ph;
     
-    
-    
-    for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
-        buffer.clear (i, 0, buffer.getNumSamples());
-
+    for (; channelIndex < getTotalNumOutputChannels(); channelIndex++)
+    {
+        buffer.clear (channelIndex, 0, buffer.getNumSamples());
+    }
 }
 
 

@@ -17,10 +17,6 @@ public:
     void resized() override;
 
 private:
-
-
-    
-    
     SharedResourcePointer<BasicLookAndFeel> lookAndFeel;
     VibratoProcessor& processor;
 
@@ -31,8 +27,5 @@ private:
     BasicKnob lfoFreqKnob, sweepWidthKnob;
     LabeledKnob labeledLfoFreqKnob, labeledSweepWidthKnob;
     
-
-    
-
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (VibratoEditor)
 };
