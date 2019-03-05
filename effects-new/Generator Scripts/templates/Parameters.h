@@ -5,10 +5,15 @@
 class {{ projectName }}Parameters
 {
 public:
-    // Id's are symbolic names, Names are human-friendly names for GUI
-    // Labels are supplementary, typically used for units of measure
+    // Id's are symbolic names, Names are human-friendly names for GUI.
+    // Labels are supplementary, typically used for units of measure.
     {% for p in params %}
     static const String {{ p['baseName'] }}ID, {{ p['baseName'] }}Name, {{ p['baseName'] }}Label;
+    {% if p['enumCount'] > 0 %}
+    static const int {{ p['baseName'] }}EnumCount;
+    {% else %}
+    static const float {{ p['baseName'] }}Min, {{ p['baseName'] }}Max, {{ p['baseName'] }}Default, {{ p['baseName'] }}Step;
+    {% endif %}
     {% endfor %}
     static AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
 
