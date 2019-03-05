@@ -1,12 +1,12 @@
 Project,descriptive name,base name,label,enum count,unit,min,max,default,step,variable name
 BasicGain,Gain,gain,Gain,,dB,-100,12,0,,linearGain
 ,,,,,,,,,,
-Tremolo,LFO Waveform,lfoWaveform,LFO,4,,,,,,lfoWaveform
+Tremolo,LFO Waveform,lfoWaveform,LFO,4,,,,0,,lfoWaveform
 Tremolo,LFO Frequency,lfoFreq,LFO Freq,,Hz,0.1,10,1,,lfoFreqHz
 Tremolo,Modulation Depth,modDepth,Mod Depth,,%,0,100,50,,modDepth
 ,,,,,,,,,,
 RingMod,Carrier Frequency,carrierFreq,Carrier Freq,,Hz,1,1000,,,carrierFreqHz
-RingMod,LFO Waveform,lfoWaveform,LFO Waveform,5,,,,,,lfoWaveform
+RingMod,LFO Waveform,lfoWaveform,LFO Waveform,5,,,,0,,lfoWaveform
 RingMod,LFO Frequency,lfoFreq,LFO Freq,,Hz,1,10,,,lfoFreqHz
 RingMod,LFO Sweep Width,lfoWidth,LFO Sweep Width,,Hz,0,100,,,lfoWidthHz
 ,,,,,,,,,,
@@ -16,7 +16,7 @@ Compressor,Release Time,release,Release Time,,ms,0.1,1000,100,0.1,releaseTimeMs
 Compressor,Threshold,threshold,Threshold,,dB,-60,0,0,0.5,threshold
 Compressor,Make-Up Gain,gain,Make-Up Gain,,dB,0,24,0,0.1,makeUpGain
 ,,,,,,,,,,
-Distortion,Distortion Type,distType,Type,5,,,,,,distType
+Distortion,Distortion Type,distType,Type,5,,,,0,,distType
 Distortion,Gain,gain,Gain,,dB,-24,24,0,0.1,linearGain
 ,,,,,,,,,,
 ParametricEQ,Centre Frequency,centreFreq,Centre Freq,,Hz,10,20000,1000,,centreFreqHz
@@ -33,3 +33,12 @@ AutoWah,LFO Width,lfoWidth,LFO Width,,Hz,0,2000,1000,,lfoWidthHz
 AutoWah,Attack Time,attack,Attack Time,,sec,0,0.1,0.006,,attackTimeSec
 AutoWah,Decay Time,decay,Decay Time,,sec,0,2,0.2,,decayTimeSec
 AutoWah,Envelope Width,envWidth,Env Width,,Hz,0,4000,0,,envWidthHz
+,,,,,,,,,,
+Phaser,Base Frequency,baseFreq,Base Freq,,Hz,50,1000,200,0.5,baseFreqHz
+Phaser,Sweep Width,sweepWidth,Sweep Width,,Hz,50,5000,2000,0.5,sweepWidthHz
+Phaser,Depth,depth,,,%,0,100,100,1,depth
+Phaser,Feedback,feedback,Feedback,,%,0,99,0,1,feedback
+Phaser,LFO Frequency,lfoFreq,LFO Freq,,Hz,0.05,2,0.5,0.05,lfoFreqHz
+Phaser,Stereo,stereo,Stereo,2,,,,0,,stereoMode
+Phaser,LFO Waveform,lfoWaveform,LFO,4,,,,0,,lfoWaveform
+Phaser,Number of Filters,numFilters,Number of Filters,5,,,,1,,numFilters

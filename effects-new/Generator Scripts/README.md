@@ -1,7 +1,10 @@
 # Code-generation scripts
-**This is work-in-progress!**
 
 Python scripts for template-based generation of starter code for new audio-effects projects. These are based on the [Jinja2](http://jinja.pocoo.org/) template library.
+
+Writing and using scripts to generate code is extremely demanding work, and **I do not recommend this practice** for any but the most experienced programmers. This is simply an approach I have chosen to use, and it's better to include all this in the open-source repo than to leave it out.
+
+## Setup
 
 Works fine in the Python v2.7 installed by default on macOS Mojave (or Windows, or Linux), but you'll need to install Jinja2 as
 ```
@@ -14,6 +17,8 @@ sudo easy_install pip
 sudo pip Jinja2
 ```
 because I'm used to *pip*.
+
+## Use
 
 Next you'll need to edit *Parameters.xslx* (in Excel), re-export to *Parameters.csv*, and edit *gen.py* to set the project name (on or about line 33). Once you've done all that, run (in this directory):
 ```

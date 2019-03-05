@@ -10,7 +10,7 @@ public:
     {% for p in params %}
     static const String {{ p['baseName'] }}ID, {{ p['baseName'] }}Name, {{ p['baseName'] }}Label;
     {% if p['enumCount'] > 0 %}
-    static const int {{ p['baseName'] }}EnumCount;
+    static const int {{ p['baseName'] }}EnumCount, {{ p['baseName'] }}Default;
     {% else %}
     static const float {{ p['baseName'] }}Min, {{ p['baseName'] }}Max, {{ p['baseName'] }}Default, {{ p['baseName'] }}Step;
     {% endif %}

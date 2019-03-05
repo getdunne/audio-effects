@@ -6,7 +6,8 @@
     , processor (p)
     {% for p in params %}
     {% if p['enumCount'] == 0 %}
-    , {{ projectName }}Parameters::{{ p['baseName'] }}Min, {{ projectName }}Parameters::{{ p['baseName'] }}Max, "{{ p['unitOfMeasure'] }}", labeled{{ p['baseName']|capitalizeFirstLetterOnly }}Knob("{{ p['labelText'] }}", {{ p['baseName'] }}Knob)
+    , {{ p['baseName'] }}Knob({{ projectName }}Parameters::{{ p['baseName'] }}Min, {{ projectName }}Parameters::{{ p['baseName'] }}Max, "{{ p['unitOfMeasure'] }}")
+    , labeled{{ p['baseName']|capitalizeFirstLetterOnly }}Knob("{{ p['labelText'] }}", {{ p['baseName'] }}Knob)
     {% endif %}
     {% endfor %}
 {
@@ -39,7 +40,7 @@
         {% endif %}
         {% endfor %}
         {% if params[-1]['enumCount'] > 0 %}
-        {{ params[-1]['baseName'] }}Combo )
+        {{ params[-1]['baseName'] }}Combo );
         {% else %}
         {{ params[-1]['baseName'] }}Knob );
         {% endif %}

@@ -6,7 +6,8 @@ const String {{ projectName }}Parameters::{{ p['baseName'] }}ID = "{{ p['baseNam
 const String {{ projectName }}Parameters::{{ p['baseName'] }}Name = TRANS("{{ p['labelText'] }}");
 const String {{ projectName }}Parameters::{{ p['baseName'] }}Label = "{{ p['unitOfMeasure'] }}";
 {% if p['enumCount'] > 0 %}
-const int String {{ projectName }}Parameters::{{ p['baseName'] }}EnumCount = {{ p['enumCount'] }};
+const int {{ projectName }}Parameters::{{ p['baseName'] }}EnumCount = {{ p['enumCount'] }};
+const int {{ projectName }}Parameters::{{ p['baseName'] }}Default = {{ p['defaultValue'] }};
 {% else %}
 const float {{ projectName }}Parameters::{{ p['baseName'] }}Min = {{ p['minValue']|makeFloat }};
 const float {{ projectName }}Parameters::{{ p['baseName'] }}Max = {{ p['maxValue']|makeFloat }};
@@ -23,7 +24,7 @@ AudioProcessorValueTreeState::ParameterLayout {{ projectName }}Parameters::creat
     {% if p['enumCount'] > 0 %}
     params.push_back(std::make_unique<AudioParameterInt>(
         {{ p['baseName'] }}ID, {{ p['baseName'] }}Name,
-        0, {{ p['baseName'] }}EnumCount - 1, 0,
+        0, {{ p['baseName'] }}EnumCount - 1, {{ p['baseName'] }}Default,
         {{ p['baseName'] }}Label,
         [](int value, int maxLength) { return String(value).substring(0, maxLength); },
         [](const String& text) { return text.getIntValue(); }));
