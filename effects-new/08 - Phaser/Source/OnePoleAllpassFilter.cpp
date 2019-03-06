@@ -66,8 +66,8 @@ void OnePoleAllpassFilter::makeAllpass (const double inverseSampleRate,
     // https://ccrma.stanford.edu/~jos/pasp/Classic_Virtual_Analog_Phase.html
     
     // Avoid passing pi/2 to the tan function...
-    const double M_PI = 3.14159265358979323846264338327950288;
-    const double w0 = jmin(centreFrequency * inverseSampleRate, 0.99*M_PI);
+    const double DBL_PI = 3.14159265358979323846264338327950288;
+    const double w0 = jmin(centreFrequency * inverseSampleRate, 0.99*DBL_PI);
     const double tan_half_w0 = tan(0.5 * w0);
     
     b0 = a1 = (float)((1.0 - tan_half_w0) / (1.0 + tan_half_w0));

@@ -40,8 +40,8 @@ void TwoPoleAllpassFilter::makeAllpass (const double inverseSampleRate,
 {
     jassert (Q > 0);
 
-    const double M_PI = 3.14159265358979323846264338327950288;
-    const double discreteFrequency = 2.0 * M_PI * centreFrequency * inverseSampleRate;
+    const double DBL_PI = 3.14159265358979323846264338327950288;
+    const double discreteFrequency = 2.0 * DBL_PI * centreFrequency * inverseSampleRate;
     const double alpha = sin(discreteFrequency) / (2.0 * Q);
     const double cos_w0 = -2.0 * cos(discreteFrequency);
     
