@@ -52,3 +52,8 @@ PingPongDelay,Left Delay Time,delayTimeL,L-R Delay Time,,sec,0.01,2,0.5,0.01,del
 PingPongDelay,Right Delay Time,delayTimeR,R-L Delay Time,,sec,0.01,2,0.5,0.01,delaySecR
 PingPongDelay,Feedback,feedback,Feedback,,%,0,99.5,75,0.5,feedback
 PingPongDelay,Wet Mix Level,wetLevel,Delay Mix Level,,%,0,100,50,1,wetLevel
+,,,,,,,,,,
+Vibrato,LFO Waveform,lfoWaveform,LFO,4,,,,0,,lfoWaveform
+Vibrato,LFO Frequency,lfoFreq,LFO Freq,,Hz,0.5,5,2,0.025,lfoFreqHz
+Vibrato,Sweep Width,sweepWidth,Sweep Width,,sec,0.001,0.05,0.01,0.0005,sweepWidthHz
+Vibrato,Interpolation Type,interpType,Interpolation Type,3,,,,1,,interpolationType
