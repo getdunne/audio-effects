@@ -1,4 +1,5 @@
 # Ring Modulator
+![](RingMod.png)
 
 ## Comparison with Tremolo and BasicGain
 Ring modulation is essentially just amplitude modulation, so the core computation (multiplication of the input signal by a periodic signal from an oscillator) is the same as in the Tremolo effect, with just three main differences in the code:

@@ -1,4 +1,6 @@
 # Parametric EQ
+![](ParametricEQ.png)
+
 This is a straightforward port of Reiss and McPherson's original code, with just a few changes to avoid deprecated JUCE function calls, plus the usual parameter-handling and GUI enhancements you have seen in the earlier projects.
 
 The processor object (which owns the filters) needs to be informed when the parameter values change, in order to update the filter settings. This is implemented by making the processor an *AudioProcessorValueTreeState::Listener*. The listener callback is also a handy place to inform the GUI that it should update its display of the current filter bandwidth.

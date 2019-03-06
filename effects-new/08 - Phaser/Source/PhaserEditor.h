@@ -13,6 +13,9 @@ public:
     void paint (Graphics&) override;
     void resized() override;
 
+    // ChangeListener
+    void changeListenerCallback(ChangeBroadcaster*) override;
+
 private:
     SharedResourcePointer<BasicLookAndFeel> lookAndFeel;
     PhaserProcessor& processor;

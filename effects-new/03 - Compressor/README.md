@@ -1,4 +1,6 @@
 # Compressor
+![](Compressor.png)
+
 The *Compressor* effect is a straightforward port of Reiss and McPherson's original code, with all of the same parameter-handling and GUI enhancements you have already seen in *BasicGain*, *Tremolo*, and *RingMod*.
 
 However, I have added one small GUI enhancement: a dynamic bar-graph indicator to visualize the current gain value (linear scale, 0 dB unity gain at the far right). The supporting code is added to *CompressorProcessor::computeCompressionGain()* (called simply *compressor()* in R&M's code). The decibel gain values computed in `y_l[]` for an entire buffer are averaged in a new local variable `yl_avg`, and then converted to a linear gain in the `currentGain` member variable, which is declared *public* so it is accessible to the GUI editor.

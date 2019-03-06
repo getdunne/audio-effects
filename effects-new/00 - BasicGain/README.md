@@ -1,4 +1,6 @@
 # The BasicGain effect
+![](BasicGain.png)
+
 The **BasicGain** effect is the simplest JUCE audio plug-in which performs a parameter-driven transformation on an audio stream. It's essentially the original "Empty" effect, updated for the JUCE 5.4.x framework. Study this code first, to understand the "boilerplate" you'll see (in expanded form) in all of the other projects.
 
 ## Parameter handling

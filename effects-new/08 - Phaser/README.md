@@ -1,4 +1,6 @@
 # Phaser
+![](Phaser.png)
+
 This is a straightforward port of Reiss and McPherson's original code, with the usual enhancements to parameter handling and the GUI.
 
 I have updated their use of **juce::CriticalSection** a bit. In JUCE 5.x every **AudioProcessor** has a built-in **CriticalSection** member which gets locked while the host calls *processBlock()*. In *PhaserProcessor::allocateFilters()*, the only piece of the code which absolutely should not run while *processBlock* is running, I simply add one line at the top:

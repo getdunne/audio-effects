@@ -1,4 +1,6 @@
 # Tremolo
+![](Tremolo.png)
+
 The *Tremolo* effect is essentially a version of *BasicGain* where the gain is modulated by a low-frequency oscillator (LFO).
 
 The DSP (audio processing) code illustrates:
