@@ -35,7 +35,7 @@ public:
     float feedback;
     float wetLevel;
     bool reverseChannels;
-
+    bool linkDelays;
 
 private:
     // Reference to AudioProcessorValueTreeState object that owns the parameter objects

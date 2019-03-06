@@ -23,6 +23,7 @@ private:
     BasicKnob delayTimeRKnob; LabeledKnob labeledDelayTimeRKnob;
     BasicKnob feedbackKnob; LabeledKnob labeledFeedbackKnob;
     BasicKnob wetLevelKnob; LabeledKnob labeledWetLevelKnob;
+    ToggleButton linkDelaysToggle, reverseChannelsToggle;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PingPongDelayEditor)
 };

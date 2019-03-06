@@ -76,6 +76,7 @@ PingPongDelayParameters::PingPongDelayParameters(AudioProcessorValueTreeState& v
     , feedback(feedbackDefault)
     , wetLevel(wetLevelDefault)
     , reverseChannels(false)
+    , linkDelays(false)
     , valueTreeState(vts)
     , processorAsListener(processor)
     , delayTimeLListener(delaySecL)

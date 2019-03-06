@@ -134,7 +134,15 @@ void PingPongDelayProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffe
 // Called by the host when it needs to persist the current plugin state
 void PingPongDelayProcessor::getStateInformation (MemoryBlock& destData)
 {
-    std::unique_ptr<XmlElement> xml(valueTreeState.state.createXml());
+    std::unique_ptr<XmlElement> xml(new XmlElement("PingPongDelay"));
+    
+    // Save two parameters which are not included in the valueTreeState
+    xml->setAttribute("linkDelays", parameters.linkDelays);
+    xml->setAttribute("reverseChannels", parameters.reverseChannels);
+
+    // save valueTreeState as a subtree
+    xml->addChildElement(valueTreeState.state.createXml());
+
     copyXmlToBinary(*xml, destData);
 }
 
@@ -142,8 +150,12 @@ void PingPongDelayProcessor::getStateInformation (MemoryBlock& destData)
 void PingPongDelayProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     std::unique_ptr<XmlElement> xml(getXmlFromBinary(data, sizeInBytes));
-    if (xml && xml->hasTagName(valueTreeState.state.getType()))
+    if (xml && xml->hasTagName("PingPongDelay"))
     {
-        valueTreeState.state = ValueTree::fromXml(*xml);
+        parameters.linkDelays = xml->getBoolAttribute("linkDelays", false);
+        parameters.reverseChannels = xml->getBoolAttribute("reverseChannels", false);
+
+        XmlElement* vtsXml = xml->getChildByName(valueTreeState.state.getType());
+        if (vtsXml) valueTreeState.state = ValueTree::fromXml(*xml);
     }
 }

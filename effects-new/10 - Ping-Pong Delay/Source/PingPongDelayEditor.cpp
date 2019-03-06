@@ -27,13 +27,51 @@ PingPongDelayEditor::PingPongDelayEditor (PingPongDelayProcessor& p)
     wetLevelKnob.setDoubleClickReturnValue(true, double(PingPongDelayParameters::wetLevelDefault), ModifierKeys::noModifiers);
     addAndMakeVisible(labeledWetLevelKnob);
 
+    linkDelaysToggle.setButtonText("Link Delays");
+    linkDelaysToggle.setToggleState(processor.parameters.linkDelays, dontSendNotification);
+    linkDelaysToggle.onStateChange = [this]()
+    {
+        processor.parameters.linkDelays = linkDelaysToggle.getToggleState();
+        if (processor.parameters.linkDelays)
+        {
+            auto time = delayTimeLKnob.getValue();
+            delayTimeRKnob.setValue(time, sendNotification);
+        }
+    };
+    addAndMakeVisible(linkDelaysToggle);
+
+    delayTimeLKnob.onValueChange = [this]()
+    {
+        if (processor.parameters.linkDelays)
+        {
+            auto time = delayTimeLKnob.getValue();
+            delayTimeRKnob.setValue(time, sendNotification);
+        }
+    };
+    delayTimeRKnob.onValueChange = [this]()
+    {
+        if (processor.parameters.linkDelays)
+        {
+            auto time = delayTimeRKnob.getValue();
+            delayTimeLKnob.setValue(time, sendNotification);
+        }
+    };
+
+    reverseChannelsToggle.setButtonText("Reverse Channels");
+    reverseChannelsToggle.setToggleState(processor.parameters.reverseChannels, dontSendNotification);
+    reverseChannelsToggle.onStateChange = [this]()
+    {
+        processor.parameters.reverseChannels = reverseChannelsToggle.getToggleState();
+    };
+    addAndMakeVisible(reverseChannelsToggle);
+
     processor.parameters.attachControls(
         delayTimeLKnob,
         delayTimeRKnob,
         feedbackKnob,
         wetLevelKnob );
 
-    setSize (60 + 100 * 4 + 10 * (4 - 1), 180);
+    setSize (60 + 100 * 4 + 10 * (4 - 1), 220);
 }
 
 PingPongDelayEditor::~PingPongDelayEditor()
@@ -49,7 +87,14 @@ void PingPongDelayEditor::resized()
     mainGroup.setBounds(bounds);
     auto widgetsArea = bounds.reduced(10);
     widgetsArea.removeFromTop(20);
-    int width = (widgetsArea.getWidth() - (4 - 1) * 10) / 4;
+
+    auto rowArea = widgetsArea.removeFromTop(24).reduced(40, 0);
+    auto width = (rowArea.getWidth() - 20) / 2;
+    linkDelaysToggle.setBounds(rowArea.removeFromLeft(width));
+    reverseChannelsToggle.setBounds(rowArea.removeFromRight(width));
+
+    widgetsArea.removeFromTop(16);
+    width = (widgetsArea.getWidth() - (4 - 1) * 10) / 4;
     labeledDelayTimeLKnob.setBounds(widgetsArea.removeFromLeft(width));
     widgetsArea.removeFromLeft(10);
     labeledDelayTimeRKnob.setBounds(widgetsArea.removeFromLeft(width));
