@@ -57,3 +57,12 @@ Vibrato,LFO Waveform,lfoWaveform,LFO,4,,,,0,,lfoWaveform
 Vibrato,LFO Frequency,lfoFreq,LFO Freq,,Hz,0.5,5,2,0.025,lfoFreqHz
 Vibrato,Sweep Width,sweepWidth,Sweep Width,,sec,0.001,0.05,0.01,0.0005,sweepWidthHz
 Vibrato,Interpolation Type,interpType,Interpolation Type,3,,,,1,,interpolationType
+,,,,,,,,,,
+Flanger,Min Delay,minDelay,Min Delay,,ms,1,20,2.5,0.5,minDelayMs
+Flanger,Sweep Width,sweepWidth,Sweep Width,,ms,1,20,10,0.5,sweepWidthMs
+Flanger,Depth,depth,,,%,0,100,100,1,depth
+Flanger,Feedback,feedback,Feedback,,%,0,50,0,1,feedback
+Flanger,LFO Frequency,lfoFreq,LFO Freq,,Hz,0.05,2,0.2,0.01,lfoFreqHz
+Flanger,Stereo,stereo,Stereo,2,,,,0,,stereoMode
+Flanger,LFO Waveform,lfoWaveform,LFO,4,,,,0,,lfoWaveform
+Flanger,Interpolation Type,interpType,Interpolation Type,3,,,,1,,interpolationType
