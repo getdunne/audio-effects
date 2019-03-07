@@ -53,16 +53,34 @@ PingPongDelay,Right Delay Time,delayTimeR,R-L Delay Time,,sec,0.01,2,0.5,0.01,de
 PingPongDelay,Feedback,feedback,Feedback,,%,0,99.5,75,0.5,feedback
 PingPongDelay,Wet Mix Level,wetLevel,Delay Mix Level,,%,0,100,50,1,wetLevel
 ,,,,,,,,,,
-Vibrato,LFO Waveform,lfoWaveform,LFO,4,,,,0,,lfoWaveform
+Vibrato,LFO Waveform,lfoWaveform,LFO,5,,,,0,,lfoWaveform
 Vibrato,LFO Frequency,lfoFreq,LFO Freq,,Hz,0.5,5,2,0.025,lfoFreqHz
 Vibrato,Sweep Width,sweepWidth,Sweep Width,,sec,0.001,0.05,0.01,0.0005,sweepWidthHz
 Vibrato,Interpolation Type,interpType,Interpolation Type,3,,,,1,,interpolationType
 ,,,,,,,,,,
 Flanger,Min Delay,minDelay,Min Delay,,ms,1,20,2.5,0.5,minDelayMs
 Flanger,Sweep Width,sweepWidth,Sweep Width,,ms,1,20,10,0.5,sweepWidthMs
-Flanger,Depth,depth,,,%,0,100,100,1,depth
+Flanger,Depth,depth,Depth,,%,0,100,100,1,depth
 Flanger,Feedback,feedback,Feedback,,%,0,50,0,1,feedback
 Flanger,LFO Frequency,lfoFreq,LFO Freq,,Hz,0.05,2,0.2,0.01,lfoFreqHz
 Flanger,Stereo,stereo,Stereo,2,,,,0,,stereoMode
 Flanger,LFO Waveform,lfoWaveform,LFO,4,,,,0,,lfoWaveform
 Flanger,Interpolation Type,interpType,Interpolation Type,3,,,,1,,interpolationType
+,,,,,,,,,,
+Chorus,Min Delay,minDelay,Min Delay,,ms,10,50,30,1,minDelayMs
+Chorus,Sweep Width,sweepWidth,Sweep Width,,ms,10,50,20,1,sweepWidthMs
+Chorus,Depth,depth,Depth,,%,0,100,100,1,depth
+Chorus,Voice Count,voiceCount,Number of Voices,,%,0,50,2,1,voiceCount
+Chorus,LFO Frequency,lfoFreq,LFO Freq,,Hz,0.05,2,0.2,0.025,lfoFreqHz
+Chorus,Stereo,stereo,Stereo,2,,,,0,,stereoMode
+Chorus,LFO Waveform,lfoWaveform,LFO,4,,,,0,,lfoWaveform
+Chorus,Interpolation Type,interpType,Interpolation Type,3,,,,1,,interpolationType
+,,,,,,,,,,
+Reverb,Damping,damping,Damping,,,0,1,0,0.01,damping
+Reverb,Density,density,Density,,,0,1,0.5,0.01,density
+Reverb,Bandwidth,bandwidth,Bandwidth,,,0,1,1,0.01,bandwidth
+Reverb,Decay,decay,Decay,,,0,1,0.5,0.01,decay
+Reverb,Predelay,predelay,Predelay,,,0,1,0,0.01,predelay
+Reverb,Size,roomSize,Room Size,,,0,1,0.5,0.01,roomSize
+Reverb,Mix,dryWetMix,Mix,,,0,1,0.15,0.01,dryWetMix
+Reverb,Early Reflection Mix,earlyRefMix,E.R. Mix,,,0,1,0.75,0.01,earlyRefMix
