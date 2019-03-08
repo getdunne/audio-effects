@@ -42,9 +42,9 @@ These effects naturally group into the following taxonomy, roughly in order of i
    * Reverb
 
  * **Phase-vocoder effects** (R&M Chapter 8)
-   * Pitch shifter
-   * Robot-voice effect
-
+   * These two effects are NOT done yet
+   * *Pitch shifter*
+   * *Robot-voice effect*
 
 ## Notes on the Projucer
 The JUCE Projucer is a tremendously useful tool for generating new JUCE projects according to a consistent pattern. It uses code templates to generate "Processor" and "Editor" code files from scratch, but subsequently, you can edit and even rename these files, and the Projucer will leave them alone even if you re-open the *.jucer* file, make configuration changes, and re-save.
