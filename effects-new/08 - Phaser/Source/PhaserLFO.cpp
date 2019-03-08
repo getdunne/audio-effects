@@ -16,7 +16,7 @@ void PhaserLFO::populateWaveformComboBox(ComboBox& cb)
 // Phase range [0, 1], output also [0, 1] (not [-1, +1] as for the ordinary Sine function).
 float PhaserLFO::getSample(float phase, Waveform waveform)
 {
-#define DBL_PI 3.14159265358979323846
+#define TWOPI_F 6.283185f
 
     switch (waveform)
     {
@@ -39,6 +39,6 @@ float PhaserLFO::getSample(float phase, Waveform waveform)
             return phase - 0.5f;
     case kWaveformSine:
     default:
-        return 0.5f + 0.5f*sinf(2.0 * DBL_PI * phase);
+        return 0.5f + 0.5f*sinf(TWOPI_F * phase);
     }
 }
