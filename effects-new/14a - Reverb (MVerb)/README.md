@@ -1,10 +1,10 @@
-# Reverb
+# Reverb 1 (MVerb)
 ![](MVerb.png)
 
 This is a more-or-less straightforward port of Reiss and McPherson's original code, with the usual GUI and parameter-handling enhancements. I have chosen different default values for the MVerb parameters, and omitted the *Gain* knob, leaving the MVerb *Gain* parameter at 1.0 (100%).
 
 ## Project naming
-I have named this project "MVerb" rather than the more generic "Reverb" (or R&M's original name "algoreverb"), to emphasize that the underlying reverberator code is [Martin Eastwood's MVerb](https://github.com/martineastwood/mverb). I intend to create a second reverb plug-in based on the JUCE 5.x built-in reverb algorithm, which is based on [FreeVerb](https://ccrma.stanford.edu/~jos/pasp/Freeverb.html), which I will call *FreeVerb*.
+I have named this project "MVerb" rather than the more generic "Reverb" (or R&M's original name "algoreverb"), to emphasize that the underlying reverberator code is [Martin Eastwood's MVerb](https://github.com/martineastwood/mverb). I have also written a second reverb plug-in based on the JUCE 5.x built-in reverb algorithm (which itself is based on [FreeVerb](https://ccrma.stanford.edu/~jos/pasp/Freeverb.html)), called "JVerb".
 
 ## Citation requirement
 

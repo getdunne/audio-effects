@@ -76,11 +76,18 @@ Chorus,Stereo,stereo,Stereo,2,,,,0,,stereoMode
 Chorus,LFO Waveform,lfoWaveform,LFO,4,,,,0,,lfoWaveform
 Chorus,Interpolation Type,interpType,Interpolation Type,3,,,,1,,interpolationType
 ,,,,,,,,,,
-Reverb,Damping,damping,Damping,,,0,1,0,0.01,damping
-Reverb,Density,density,Density,,,0,1,0.5,0.01,density
-Reverb,Bandwidth,bandwidth,Bandwidth,,,0,1,1,0.01,bandwidth
-Reverb,Decay,decay,Decay,,,0,1,0.5,0.01,decay
-Reverb,Predelay,predelay,Predelay,,,0,1,0,0.01,predelay
-Reverb,Size,roomSize,Room Size,,,0,1,0.5,0.01,roomSize
-Reverb,Mix,dryWetMix,Mix,,,0,1,0.15,0.01,dryWetMix
-Reverb,Early Reflection Mix,earlyRefMix,E.R. Mix,,,0,1,0.75,0.01,earlyRefMix
+Mverb,Damping,damping,Damping,,,0,1,0.5,0.01,damping
+Mverb,Density,density,Density,,,0,1,0.75,0.01,density
+Mverb,Bandwidth,bandwidth,Bandwidth,,,0,1,1,0.01,bandwidth
+Mverb,Decay,decay,Decay,,,0,1,0.75,0.01,decay
+Mverb,Predelay,predelay,Predelay,,,0,1,0,0.01,predelay
+Mverb,Size,roomSize,Room Size,,,0,1,0.8,0.01,roomSize
+Mverb,Mix,dryWetMix,Mix,,,0,1,0.5,0.01,dryWetMix
+Mverb,Late vs Early Mix,earlyLateMix,Early/Late Mix,,,0,1,0.5,0.01,earlyLateMix
+,,,,,,,,,,
+JuceVerb,Room Size,roomSize,Room Size,,,0,1,0.5,,roomSize
+JuceVerb,Damping,damping,Damping,,,0,1,0.5,,damping
+JuceVerb,Wet Level,wetLevel,Wet Level,,,0,1,0.33,,wetLevel
+JuceVerb,Dry Level,dryLevel,Dry Level,,,0,1,0.4,,dryLevel
+JuceVerb,Width,width,Width,,,0,1,1,,width
+JuceVerb,Freeze Mode,freezeMode,Freeze,2,,,,0,,freezeMode

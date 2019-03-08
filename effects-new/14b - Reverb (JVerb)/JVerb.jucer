@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="Q6ptnT" name="JVerb" projectType="audioplug" jucerVersion="5.4.3"
+              projectLineFeed="&#10;" companyName="Shane Dunne" reportAppUsage="0"
+              displaySplashScreen="0" pluginFormats="buildAU,buildStandalone,buildVST,buildVST3"
+              pluginCode="jvrb" pluginManufacturerCode="SDun" headerPath="../../../Common"
+              pluginChannelConfigs="{1,1},{2,2}">
+  <MAINGROUP id="XLUG4z" name="JVerb">
+    <GROUP id="{793AEF3A-0BE5-37F1-F738-D60ED373C5A4}" name="Common">
+      <FILE id="HSyPE2" name="BasicKnob.cpp" compile="1" resource="0" file="../Common/BasicKnob.cpp"/>
+      <FILE id="lDsiFs" name="BasicKnob.h" compile="0" resource="0" file="../Common/BasicKnob.h"/>
+      <FILE id="Rtbgty" name="LabeledKnob.cpp" compile="1" resource="0" file="../Common/LabeledKnob.cpp"/>
+      <FILE id="IabbTH" name="LabeledKnob.h" compile="0" resource="0" file="../Common/LabeledKnob.h"/>
+      <FILE id="REhL65" name="ParameterListeners.h" compile="0" resource="0"
+            file="../Common/ParameterListeners.h"/>
+    </GROUP>
+    <GROUP id="{EBC3D5DD-DB9B-D529-7541-59B54C874793}" name="Source">
+      <FILE id="HNI4gF" name="JuceVerbEditor.cpp" compile="1" resource="0"
+            file="Source/JuceVerbEditor.cpp"/>
+      <FILE id="lMH2Jb" name="JuceVerbEditor.h" compile="0" resource="0"
+            file="Source/JuceVerbEditor.h"/>
+      <FILE id="vLGbdk" name="JuceVerbParameters.cpp" compile="1" resource="0"
+            file="Source/JuceVerbParameters.cpp"/>
+      <FILE id="AzldPK" name="JuceVerbParameters.h" compile="0" resource="0"
+            file="Source/JuceVerbParameters.h"/>
+      <FILE id="UdBqao" name="JuceVerbProcessor.cpp" compile="1" resource="0"
+            file="Source/JuceVerbProcessor.cpp"/>
+      <FILE id="UpBlWt" name="JuceVerbProcessor.h" compile="0" resource="0"
+            file="Source/JuceVerbProcessor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <VS2017 targetFolder="Builds/VisualStudio2017">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug"/>
+        <CONFIGURATION isDebug="0" name="Release"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_cryptography" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="C:/JUCE/modules"/>
+        <MODULEPATH id="juce_opengl" path="C:/JUCE/modules"/>
+      </MODULEPATHS>
+    </VS2017>
+    <XCODE_MAC targetFolder="Builds/MacOSX" vstLegacyFolder="~/SDKs/VST_SDK/VST2_SDK"
+               vst3Folder="~/SDKs/VST_SDK/VST3_SDK">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug"/>
+        <CONFIGURATION isDebug="0" name="Release"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_opengl" path="../../juce"/>
+        <MODULEPATH id="juce_gui_extra" path="../../juce"/>
+        <MODULEPATH id="juce_gui_basics" path="../../juce"/>
+        <MODULEPATH id="juce_graphics" path="../../juce"/>
+        <MODULEPATH id="juce_events" path="../../juce"/>
+        <MODULEPATH id="juce_data_structures" path="../../juce"/>
+        <MODULEPATH id="juce_cryptography" path="../../juce"/>
+        <MODULEPATH id="juce_core" path="../../juce"/>
+        <MODULEPATH id="juce_audio_utils" path="../../juce"/>
+        <MODULEPATH id="juce_audio_processors" path="../../juce"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../juce"/>
+        <MODULEPATH id="juce_audio_formats" path="../../juce"/>
+        <MODULEPATH id="juce_audio_devices" path="../../juce"/>
+        <MODULEPATH id="juce_audio_basics" path="../../juce"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+  <LIVE_SETTINGS>
+    <WINDOWS/>
+    <OSX/>
+  </LIVE_SETTINGS>
+  <JUCEOPTIONS JUCE_VST3_CAN_REPLACE_VST2="0" JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+</JUCERPROJECT>
