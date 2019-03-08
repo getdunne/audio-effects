@@ -25,11 +25,6 @@ float VibratoLFO::getSample(float phase, Waveform waveform)
             return 1.0f - 2.0f*(phase - 0.25f);
         else
             return 2.0f*(phase - 0.75f);
-    case kWaveformSquare:
-        if (phase < 0.5f)
-            return 1.0f;
-        else
-            return 0.0f;
     case kWaveformSawtooth:
         if (phase < 0.5f)
             return 0.5f + phase;

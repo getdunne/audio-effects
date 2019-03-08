@@ -10,10 +10,8 @@ struct VibratoLFO
     {
         kWaveformSine = 0,
         kWaveformTriangle,
-        kWaveformSquare,
         kWaveformSawtooth,
-        kWaveformInverseSawtooth,
-        kNumWaveforms
+        kWaveformInverseSawtooth
     };
 
     static void populateWaveformComboBox(ComboBox& cb);
