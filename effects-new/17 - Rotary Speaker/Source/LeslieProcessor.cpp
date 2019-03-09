@@ -36,8 +36,8 @@ bool LeslieProcessor::isBusesLayoutSupported(const BusesLayout& layouts) const
     int ins = layouts.getMainInputChannels();
     int outs = layouts.getMainOutputChannels();
 
-    // accept mono in/out or stereo in/out only
-    return ((ins == 2 && outs == 2) || (ins == 1 && outs == 1));
+    // accept stereo in/out only
+    return (ins == 2 && outs == 2);
 }
 
 void LeslieProcessor::parameterChanged(const String&, float)
