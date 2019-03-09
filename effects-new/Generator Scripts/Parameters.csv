@@ -91,3 +91,5 @@ JuceVerb,Wet Level,wetLevel,Wet Level,,,0,1,0.33,,wetLevel
 JuceVerb,Dry Level,dryLevel,Dry Level,,,0,1,0.4,,dryLevel
 JuceVerb,Width,width,Width,,,0,1,1,,width
 JuceVerb,Freeze Mode,freezeMode,Freeze,2,,,,0,,freezeMode
+,,,,,,,,,,
+Leslie,Speed,speed,Speed,,,0,8,0,1,speed
