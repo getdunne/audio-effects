@@ -12,7 +12,7 @@ The original code examples are preserved at the [SoundSoftware](https://code.sou
 The *effects* folder in this repo contains lightly-updated versions of the original projects, which (with one exception) at least compile, though with many warnings. Due to changes in the JUCE framework since the code was written, several of the plug-ins don't actually run properly.
 
 ## New code
-The *effects-new* folder contains a growing collection of re-written versions of Reiss and McPherson's original examples. I'm doing this in pursuit of five goals:
+The *effects-new* folder contains re-written versions of Reiss and McPherson's original examples (plus one or two new ones). I'm doing this in pursuit of five goals:
 1. Clean compile and build under VS2017 and Xcode 10.
 2. Improved consistency in the code base.
 3. Purging all deprecated JUCE coding practices.
