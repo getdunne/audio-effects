@@ -124,7 +124,7 @@ void CompressorProcessor::computeCompressionGain(AudioSampleBuffer &buffer, int 
         x_l[i] = x_g[i] - y_g[i];
 
         // Ballistics- smoothing of the gain 
-        if (x_l[0] > yL_prev)
+        if (x_l[i] > yL_prev)
             y_l[i] = alphaAttack * yL_prev + (1 - alphaAttack) * x_l[i];
         else
             y_l[i] = alphaRelease * yL_prev + (1 - alphaRelease) * x_l[i];

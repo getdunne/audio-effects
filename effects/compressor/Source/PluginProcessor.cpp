@@ -109,7 +109,7 @@ void CompressorAudioProcessor::compressor(AudioSampleBuffer &buffer, int m)
 		else y_g[i] = x_g[i];
 		x_l[i] = x_g[i] - y_g[i];
 		//Ballistics- smoothing of the gain 
-		if (x_l[0]>yL_prev)  y_l[i]=alphaAttack * yL_prev+(1 - alphaAttack ) * x_l[i] ; 
+		if (x_l[i]>yL_prev)  y_l[i]=alphaAttack * yL_prev+(1 - alphaAttack ) * x_l[i] ; 
 		else				 y_l[i]=alphaRelease* yL_prev+(1 - alphaRelease) * x_l[i] ;
 		//find control
 		c[i] = pow(10,(makeUpGain - y_l[i])/20);
