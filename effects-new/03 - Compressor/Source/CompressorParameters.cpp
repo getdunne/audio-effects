@@ -67,7 +67,7 @@ AudioProcessorValueTreeState::ParameterLayout CompressorParameters::createParame
 
 CompressorParameters::CompressorParameters(AudioProcessorValueTreeState& vts)
     : compressionRatio(1.0f)
-    , attackTimeMs(0.1f), releaseTimeMs(0.1f)
+    , attackTimeMs(15.0f), releaseTimeMs(100.0f)
     , threshold(0.0f)
     , makeUpGain(0.0f)
     , valueTreeState(vts)
