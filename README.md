@@ -6,6 +6,9 @@ The original code was developed with a much earlier version of the [JUCE](https:
 
 This code is licensed under the [GNU General Public License, version 3](https://www.gnu.org/licenses/gpl-3.0.en.html) (with a few exceptions -- see below under "Licensing").
 
+## Important link
+As explained below and elsewhere, I haven't actually completed the re-implementation of the phase vocoder based effects. I would direct the interested reader to [this excellent work](https://github.com/juandagilc/Audio-Effects) by Juan Gil, PhD Fellow at Aalborg University in Denmark.
+
 ## Original code
 The original code examples are preserved at the [SoundSoftware](https://code.soundsoftware.ac.uk/projects/audio_effects_textbook_code) site. Several of the projects are now substantially out-of-date and don't compile cleanly in [Microsoft Visual Studio 2017](https://visualstudio.microsoft.com/) and [Xcode 10](https://developer.apple.com/xcode/).
 
